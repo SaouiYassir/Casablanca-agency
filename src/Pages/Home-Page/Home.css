@@ -1,0 +1,46 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.hero-container {
+    display: flex;
+    position: relative;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-image: linear-gradient(135deg, rgba(10, 22, 40, 0.7) 0%, rgba(18, 30, 63, 0.5) 100%), url('../../assets/Hero-Background.png');
+    background-size: cover;
+    background-position: center;
+    flex-direction: column;
+    gap: 40px;
+}
+
+.hero-container::before {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 150px;
+  background: linear-gradient(to top, var(--white) 0%, transparent 100%);
+  pointer-events: none;
+  z-index: 2;
+}
+
+.hero-container h1 {
+    font-size: 48px;
+    color: var(--primary-color);
+    font-family: "Roboto Mono", monospace;
+    text-align: center;
+    max-width: 80%;
+}
+
+.hero-container p {
+    font-size: 24px;
+    color: white;
+    font-family: "Roboto Mono", monospace;
+    text-align: center;
+    max-width: 70%;
+}
