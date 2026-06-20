@@ -8,7 +8,7 @@
     display: flex;
     justify-content: space-around;
     align-items: center;
-    padding: 20px;
+    padding: 13px 20px;
     background-color: var(--primary-color);
     position: fixed;
     width: 80%;
@@ -19,7 +19,7 @@
 }
 
 .header .logo {
-    font-size: 24px;
+    font-size: 18px;
     font-weight: bold;
     color: var(--background-color);
     font-family: "Roboto Mono", monospace;
@@ -34,7 +34,7 @@
     text-decoration: none;
     color: var(--background-color);
     font-family: "Roboto Mono", monospace;
-    font-size: 18px;
+    font-size: 15px;
     transition: color 0.3s ease;
 }
 
