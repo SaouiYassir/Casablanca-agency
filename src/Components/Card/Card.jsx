@@ -13,7 +13,7 @@ function Card({ id, marque, modèle, year, status, prixParJour, type, fuel }) {
     const statusClass = getStatusClass(status);
     const carName = `${marque || ''} ${modèle || ''}`.trim() || "Véhicule Premium";
 
-    const phoneNumber = "212616498453"; // Replace with your client's real phone line number
+    const phoneNumber = "212601109965"; // Replace with your client's real phone line number
     const whatsappMessage = encodeURIComponent(
         `Bonjour Casablanca Location ! Je souhaite réserver le véhicule suivant :\n- Modèle : ${carName} (${year || 'N/A'})\n- Prix : ${prixParJour} DH/jour\n- Transmission/Carburant : ${type || ''} - ${fuel || ''}`
     );
