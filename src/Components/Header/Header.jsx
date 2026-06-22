@@ -27,7 +27,7 @@ function Header() {
 
         <header className={`header ${isScrolled ? 'scrolled' : ''}`}>
             <div className="logo">Casablanca Location</div>
-            <nav className="nav">
+            <nav className="nav-links">
                 <a href="/">Home</a>
                 <a href="#about">About</a>
                 <a href="/all-cars">Catalogue</a>
