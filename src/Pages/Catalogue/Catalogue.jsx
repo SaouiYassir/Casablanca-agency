@@ -22,12 +22,21 @@ function Catalogue({ page }) {
             });
     }, []);
 
-    if (loading) return <div className="text-center py-10">Loading catalog...</div>;
+    // if (loading) return <div className="text-center py-10">Loading catalog...</div>;
+    if (loading) {
+    return (
+        <div className="catalog-loading-container">
+            <div className="catalog-spinner"></div>
+            <p className="catalog-loading-text">Chargement du catalogue...</p>
+        </div>
+    );
+}
 
     if (page === false) {
         return (
             <div className="catalogue-section">
                 {/* 1. Main Grid: Limited strictly to 3 elements */}
+                <h2 className='catalogue-title'>Take a Look Here ...</h2>
                 <div id="cars-container" className="cars-container">
                     {cars.slice(0, 3).map((car, index) => (
                         <Card
@@ -57,20 +66,23 @@ function Catalogue({ page }) {
     }
 
     return (
-        <div id="cars-container" className="cars-container">
-            {cars.map((car, index) => (
-                <Card
-                    key={car.id || car.idVoiture || index}
-                    id={car.id || car.idVoiture || index}
-                    marque={car.marque}
-                    modèle={car.modèle}
-                    year={car.année}
-                    prixParJour={car.prixParJour || "A discuter"}
-                    status={car.status}
-                    type={car.type}
-                    fuel={car.fuel}
-                />
-            ))}
+        <div>
+            <h1 className='catalogue-title'>Cars Catalogue</h1>
+            <div id="cars-container" className="cars-container">
+                {cars.map((car, index) => (
+                    <Card
+                        key={car.id || car.idVoiture || index}
+                        id={car.id || car.idVoiture || index}
+                        marque={car.marque}
+                        modèle={car.modèle}
+                        year={car.année}
+                        prixParJour={car.prixParJour || "A discuter"}
+                        status={car.status}
+                        type={car.type}
+                        fuel={car.fuel}
+                    />
+                ))}
+            </div>
         </div>
     );
 }

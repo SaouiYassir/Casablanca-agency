@@ -19,7 +19,6 @@ function App() {
 
                 <Route path="/all-cars" element={
                     <div style={{ paddingTop: '120px' }}>
-                        <h1 style={{ textAlign: 'center', fontFamily: 'Roboto Mono' }}>Cars Catalogue</h1>
                         <Catalogue page={true} />
                     </div>
                 } />
