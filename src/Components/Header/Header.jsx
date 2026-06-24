@@ -29,7 +29,7 @@ function Header() {
             <div className="logo">Casablanca Location</div>
             <nav className="nav-links">
                 <a href="/">Home</a>
-                <a href="#about">About</a>
+                <a href="/about">About</a>
                 <a href="/all-cars">Catalogue</a>
                 <a href="#contact">Contact</a>
             </nav>

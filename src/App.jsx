@@ -4,6 +4,7 @@ import Header from "./Components/Header/Header.jsx";
 import Home from './Pages/Home-Page/Home.jsx'
 import Catalogue from "./Pages/Catalogue/Catalogue.jsx";
 import './App.css'
+import About from './Pages/About/About.jsx';
 
 function App() {
     return (
@@ -21,6 +22,12 @@ function App() {
                     <div style={{ paddingTop: '120px' }}>
                         <Catalogue page={true} />
                     </div>
+                } />
+
+                <Route path='/about' element={
+                    <>
+                        <About />
+                    </>
                 } />
             </Routes>
         </Router>
