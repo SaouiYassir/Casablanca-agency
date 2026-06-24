@@ -14,7 +14,6 @@ function Catalogue({ page }) {
             .then(json => {
                 setCars(json.feuille1 || []);
                 setLoading(false);
-                console.log(json.feuille1);
             })
             .catch(error => {
                 console.error('Error fetching data:', error);
@@ -22,7 +21,6 @@ function Catalogue({ page }) {
             });
     }, []);
 
-    // if (loading) return <div className="text-center py-10">Loading catalog...</div>;
     if (loading) {
     return (
         <div className="catalog-loading-container">

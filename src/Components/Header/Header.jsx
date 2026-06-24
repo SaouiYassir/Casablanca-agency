@@ -31,7 +31,7 @@ function Header() {
                 <a href="/">Home</a>
                 <a href="/about">About</a>
                 <a href="/all-cars">Catalogue</a>
-                <a href="#contact">Contact</a>
+                <a href="/contact">Contact</a>
             </nav>
 
 
@@ -43,9 +43,9 @@ function Header() {
             
             <nav className={`nav ${isOpen ? 'active' : ''}`}>
                 <a href="/" onClick={() => setIsOpen(false)}>Home</a>
-                <a href="#about" onClick={() => setIsOpen(false)}>About</a>
+                <a href="/about" onClick={() => setIsOpen(false)}>About</a>
                 <a href="/all-cars" onClick={() => setIsOpen(false)}>Catalogue</a>
-                <a href="#contact" onClick={() => setIsOpen(false)}>Contact</a>
+                <a href="/contact" onClick={() => setIsOpen(false)}>Contact</a>
             </nav>
         </header>
     );

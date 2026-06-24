@@ -8,3 +8,7 @@
     --accent-color: #0F766E;
     --whatsapp-color: #008000;
 }
+
+* {
+    scroll-behavior: smooth;
+}

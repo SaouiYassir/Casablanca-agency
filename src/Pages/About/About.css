@@ -1,0 +1,23 @@
+* {
+    padding: 0;
+    margin: 0;
+}
+
+.about-comtainer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100px;
+    padding: 400px 0;
+    gap: 50px;
+    flex-direction: column;
+}
+
+.about-comtainer h2 {
+    font-size: 48px;
+    color: var(--primary-color);
+    font-family: "Roboto Mono", monospace;
+    text-align: center;
+    max-width: 80%;
+}

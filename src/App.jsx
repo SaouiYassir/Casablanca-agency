@@ -5,6 +5,7 @@ import Home from './Pages/Home-Page/Home.jsx'
 import Catalogue from "./Pages/Catalogue/Catalogue.jsx";
 import './App.css'
 import About from './Pages/About/About.jsx';
+import Contact from './Pages/Contact/Contact.jsx';
 
 function App() {
     return (
@@ -27,6 +28,12 @@ function App() {
                 <Route path='/about' element={
                     <>
                         <About />
+                    </>
+                } />
+
+                <Route path='/contact' element={
+                    <>
+                        <Contact />
                     </>
                 } />
             </Routes>
