@@ -1,0 +1,126 @@
+#ContactForm {
+  background: #ffffff;
+  border: 1px solid #e6e0d8;
+  border-radius: 10px;
+  padding: 2rem 2.25rem;
+  font-family: 'Roboto Mono', monospace;
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  gap: 1.25rem;
+}
+
+.input-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.input-group.message-group {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.input-group label {
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: #1f2733;
+  letter-spacing: 0.3px;
+}
+
+.input-group input,
+.input-group textarea {
+  font-family: 'Roboto Mono', monospace;
+  font-size: 0.85rem;
+  color: #1f2733;
+  background: #faf8f5;
+  border: 1px solid #ddd6cb;
+  border-radius: 6px;
+  padding: 10px 12px;
+  outline: none;
+  transition: border-color 0.2s ease, background 0.2s ease;
+}
+
+.input-group textarea {
+  resize: none;
+  min-height: 110px;
+  line-height: 1.5;
+  flex: 1;
+}
+
+.input-group input::placeholder,
+.input-group textarea::placeholder {
+  color: #a8a095;
+}
+
+.input-group input:hover,
+.input-group textarea:hover {
+  border-color: #c9bfae;
+}
+
+.input-group input:focus,
+.input-group textarea:focus {
+  border-color: #b3552c;
+  background: #ffffff;
+  box-shadow: 0 0 0 3px rgba(179, 85, 44, 0.12);
+}
+
+.send-butt {
+  font-family: 'Roboto Mono', monospace;
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: #ffffff;
+  background: #b3552c;
+  border: none;
+  border-radius: 6px;
+  padding: 12px 0;
+  cursor: pointer;
+  transition: background 0.2s ease, transform 0.1s ease;
+}
+
+.send-butt:hover:not(:disabled) {
+  background: #9c4823;
+}
+
+.send-butt:active:not(:disabled) {
+  transform: scale(0.98);
+}
+
+.send-butt:disabled {
+  background: #d7b6a4;
+  cursor: not-allowed;
+}
+
+.form-status {
+  margin-top: 0.5rem;
+  text-align: center;
+  font-size: 0.8rem;
+  font-weight: 500;
+}
+
+.form-status.success {
+  color: #2f7a3f;
+}
+
+.form-status.error {
+  color: #b3392c;
+}
+
+.form-status.pending {
+  color: #8a8378;
+}
+
+@media (max-width: 480px) {
+  #ContactForm {
+    padding: 1.5rem 1.25rem;
+  }
+}
