@@ -11,33 +11,37 @@ import Footer from './Components/Footer/Footer.jsx';
 function App() {
     return (
         <Router>
-            <Header />
-            <Routes>
-                <Route path="/" element={
-                    <>
-                        <Home />                        
-                    </>
-                } />
+            <div className="app-layout">
+                <Header />
+                <main className="app-main">
+                    <Routes>
+                        <Route path="/" element={
+                            <>
+                                <Home />                        
+                            </>
+                        } />
 
-                <Route path="/all-cars" element={
-                    <div style={{ paddingTop: '120px' }}>
-                        <Catalogue page={true} />
-                    </div>
-                } />
+                        <Route path="/all-cars" element={
+                            <div style={{ paddingTop: '120px' }}>
+                                <Catalogue page={true} />
+                            </div>
+                        } />
 
-                <Route path='/about' element={
-                    <>
-                        <About />
-                    </>
-                } />
+                        <Route path='/about' element={
+                            <>
+                                <About />
+                            </>
+                        } />
 
-                <Route path='/contact' element={
-                    <>
-                        <Contact />
-                    </>
-                } />
-            </Routes>
-            <Footer />
+                        <Route path='/contact' element={
+                            <>
+                                <Contact />
+                            </>
+                        } />
+                    </Routes>
+                </main>
+                <Footer />
+            </div>
         </Router>
     );
 }

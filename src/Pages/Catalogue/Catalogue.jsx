@@ -5,30 +5,52 @@ import './Catalogue.css'
 function Catalogue({ page }) {
     const [cars, setCars] = useState([]);
     const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
 
     useEffect(() => {
         const url = 'https://api.sheety.co/2010bc932455f0a94970d2187f0fb46a/carsAgency/feuille1';
 
         fetch(url)
-            .then(response => response.json())
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error(`Erreur ${response.status}`);
+                }
+                return response.json();
+            })
             .then(json => {
                 setCars(json.feuille1 || []);
                 setLoading(false);
             })
-            .catch(error => {
-                console.error('Error fetching data:', error);
+            .catch(err => {
+                console.error('Error fetching data:', err);
+                setError(err.message || "Impossible de charger le catalogue.");
                 setLoading(false);
             });
     }, []);
 
     if (loading) {
-    return (
-        <div className="catalog-loading-container">
-            <div className="catalog-spinner"></div>
-            <p className="catalog-loading-text">Chargement du catalogue...</p>
-        </div>
-    );
-}
+        return (
+            <div className="catalog-loading-container">
+                <div className="catalog-spinner"></div>
+                <p className="catalog-loading-text">Chargement du catalogue...</p>
+            </div>
+        );
+    }
+
+    if (error) {
+        return (
+            <div className="catalog-error-container">
+                <i className="bi bi-exclamation-triangle catalog-error-icon"></i>
+                <p className="catalog-error-text">{error}</p>
+                <button
+                    className="catalog-retry-btn"
+                    onClick={() => window.location.reload()}
+                >
+                    Réessayer
+                </button>
+            </div>
+        );
+    }
 
     if (page === false) {
         return (
