@@ -6,6 +6,7 @@ import Catalogue from "./Pages/Catalogue/Catalogue.jsx";
 import './App.css'
 import About from './Pages/About/About.jsx';
 import Contact from './Pages/Contact/Contact.jsx';
+import Footer from './Components/Footer/Footer.jsx';
 
 function App() {
     return (
@@ -14,8 +15,7 @@ function App() {
             <Routes>
                 <Route path="/" element={
                     <>
-                        <Home />
-                        <Catalogue page={false} />
+                        <Home />                        
                     </>
                 } />
 
@@ -37,6 +37,7 @@ function App() {
                     </>
                 } />
             </Routes>
+            <Footer />
         </Router>
     );
 }

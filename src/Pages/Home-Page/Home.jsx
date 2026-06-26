@@ -1,4 +1,5 @@
 import './Home.css'
+import Catalogue from "../Catalogue/Catalogue.jsx";
 
 function Home() {
     return (
@@ -24,6 +25,28 @@ function Home() {
             <div className="explore">
                 <p>Explore</p>            
                 <i className="bi bi-chevron-down"></i>
+            </div>
+        </div>
+        <Catalogue page={false} />
+        <div className="why-us-container">
+            <span className="why-us-title">Pourquoi nous choisir</span>
+            <div className="why-us-grid">
+                <div className="why-us-item">
+                    <i className="bi bi-shield-shaded"></i>
+                    <span>Assurance incluse</span>
+                </div>
+                <div className="why-us-item">
+                    <i className="bi bi-cash-coin"></i>
+                    <span>Sans caution</span>
+                </div>
+                <div className="why-us-item">
+                    <i className="bi bi-whatsapp"></i>
+                    <span>Réservation rapide</span>
+                </div>
+                <div className="why-us-item">
+                    <i className="bi bi-headset"></i>
+                    <span>Support 24/7</span>
+                </div>
             </div>
         </div>
         </>
