@@ -1,4 +1,4 @@
-.catalogue-section {
+/* .catalogue-section {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -146,5 +146,265 @@
     }
     50% {
         opacity: 1;
+    }
+} */
+
+
+
+.catalogue-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    padding-bottom: 60px;
+    background-color: #fdfdfd;
+    padding: 70px 0;
+}
+
+.catalogue-title {
+    font-size: 30px;
+    color: var(--primary-color);
+    font-family: "Roboto Mono", monospace;
+    text-align: center;
+}
+
+.catalogue-subtitle {
+    font-family: "Roboto Mono", monospace;
+    font-size: 14px;
+    color: #5a6472;
+    text-align: center;
+    max-width: 520px;
+    margin: 12px auto 0;
+    line-height: 1.6;
+}
+
+/* --- Filter bar --- */
+.catalogue-filters {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 12px;
+    margin-top: 36px;
+    padding: 0 10%;
+}
+
+.filter-chip {
+    font-family: "Roboto Mono", monospace;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.3px;
+    background-color: transparent;
+    color: #1f2733;
+    border: 2px solid #d8dce1;
+    padding: 8px 20px;
+    border-radius: 30px;
+    cursor: pointer;
+    transition: all 0.25s cubic-bezier(0.25, 1, 0.5, 1);
+    text-transform: capitalize;
+}
+
+.filter-chip:hover {
+    border-color: #b3552c;
+    color: #b3552c;
+}
+
+.filter-chip-active {
+    background-color: #1f2733;
+    border-color: #1f2733;
+    color: #fdfdfd;
+}
+
+.filter-chip-active:hover {
+    background-color: #b3552c;
+    border-color: #b3552c;
+    color: #ffffff;
+}
+
+/* --- Results bar --- */
+.catalogue-results-bar {
+    width: 100%;
+    max-width: 1100px;
+    margin-top: 28px;
+    padding: 0 10%;
+    display: flex;
+    justify-content: flex-start;
+}
+
+.catalogue-results-count {
+    font-family: "Roboto Mono", monospace;
+    font-size: 13px;
+    color: #8a909a;
+    letter-spacing: 0.3px;
+}
+
+/* --- Empty state --- */
+.catalogue-empty-state {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    padding: 4rem 2rem;
+    text-align: center;
+}
+
+.catalogue-empty-icon {
+    font-size: 2.5rem;
+    color: #d8dce1;
+}
+
+.catalogue-empty-text {
+    font-family: "Roboto Mono", monospace;
+    color: #5a6472;
+    font-size: 1rem;
+    max-width: 360px;
+}
+
+.cars-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 40px;
+    padding: 60px 10% 30px 10%;
+    width: 100%;
+    justify-items: center;
+}
+
+.view-more-container {
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+.view-more-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background-color: transparent;
+    color: #0a1628; 
+    border: 2px solid #0a1628;
+    text-decoration: none;
+    font-family: "Roboto Mono", monospace;
+    font-size: 14px;
+    font-weight: 700;
+    padding: 12px 32px;
+    border-radius: 30px;
+    transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.view-more-btn:hover {
+    background-color: #b3552c;
+    border-color: #b3552c;
+    color: #ffffff;
+    box-shadow: 0 8px 24px rgba(179, 85, 44, 0.2);
+    transform: translateY(-2px);
+}
+
+.view-more-btn i {
+    transition: transform 0.2s ease;
+}
+
+.view-more-btn:hover i {
+    transform: translateX(4px);
+}
+
+.catalog-loading-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 400px;
+    width: 100%;
+    background-color: #fdfdfd;
+    font-family: "Roboto Mono", monospace;
+}
+
+.catalog-spinner {
+    width: 48px;
+    height: 48px;
+    border: 3px solid rgba(10, 22, 40, 0.08);
+    border-radius: 50%;
+    border-top-color: #b3552c; 
+    border-right-color: #b3552c;
+    animation: spinCatalog 0.8s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+    margin-bottom: 20px;
+}
+
+.catalog-loading-text {
+    font-size: 14px;
+    font-weight: 500;
+    color: #0a1628;
+    letter-spacing: 0.5px;
+    margin: 0;
+    animation: pulseText 1.5s ease-in-out infinite;
+}
+
+.catalog-error-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    padding: 4rem 2rem;
+    text-align: center;
+}
+
+.catalog-error-icon {
+    font-size: 2.5rem;
+    color: #b3552c;
+}
+
+.catalog-error-text {
+    font-family: 'Roboto Mono', monospace;
+    color: #1f2733;
+    font-size: 1rem;
+    max-width: 400px;
+}
+
+.catalog-retry-btn {
+    font-family: 'Roboto Mono', monospace;
+    background-color: #b3552c;
+    color: #fdf6ec;
+    border: none;
+    padding: 0.6rem 1.5rem;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.catalog-retry-btn:hover {
+    background-color: #943f1d;
+}
+
+@keyframes spinCatalog {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes pulseText {
+    0%, 100% {
+        opacity: 0.6;
+    }
+    50% {
+        opacity: 1;
+    }
+}
+
+/* --- Responsive --- */
+@media (max-width: 640px) {
+    .catalogue-filters,
+    .catalogue-results-bar,
+    .cars-container {
+        padding-left: 6%;
+        padding-right: 6%;
+    }
+
+    .filter-chip {
+        font-size: 12px;
+        padding: 7px 16px;
     }
 }
