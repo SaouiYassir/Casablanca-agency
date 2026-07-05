@@ -1,7 +1,7 @@
 import './Card.css';
 
-function Card({ id, marque, modèle, year, status, prixParJour, type, fuel }) {
-    
+function Card({ id, marque, modèle, year, status, prixParJour, type, fuel, image, transmission }) {
+
     const getStatusClass = (statusString) => {
         if (!statusString) return 'available';
         const s = statusString.toLowerCase().trim();
@@ -12,15 +12,32 @@ function Card({ id, marque, modèle, year, status, prixParJour, type, fuel }) {
 
     const statusClass = getStatusClass(status);
     const carName = `${marque || ''} ${modèle || ''}`.trim() || "Véhicule Premium";
+    const isUnavailable = statusClass !== 'available';
 
     const phoneNumber = "212601109965"; // Replace with your client's real phone line number
     const whatsappMessage = encodeURIComponent(
-        `Bonjour Casablanca Location ! Je souhaite réserver le véhicule suivant :\n- Modèle : ${carName} (${year || 'N/A'})\n- Prix : ${prixParJour} DH/jour\n- Transmission/Carburant : ${type || ''} - ${fuel || ''}`
+        `Bonjour Casablanca Location ! Je souhaite réserver le véhicule suivant :\n- Modèle : ${carName} (${year || 'N/A'})\n- Prix : ${prixParJour} DH/jour\n- Carburant : ${fuel || ''}`
     );
     const whatsappUrl = `https://wa.me/${phoneNumber}?text=${whatsappMessage}`;
 
     return (
         <div className="car-rental-card" data-id={id}>
+            {/* Photo */}
+            <div className="card-image-wrapper">
+                {image ? (
+                    <img
+                        src={image}
+                        alt={carName}
+                        className="card-image"
+                        loading="lazy"
+                    />
+                ) : (
+                    <div className="card-image-placeholder">
+                        <i className="bi bi-car-front"></i>
+                    </div>
+                )}
+            </div>
+
             {/* Top Row: Meta Tags & Badges */}
             <div className="card-badge-row">
                 <span className="car-category-tag">{type || 'Économique'}</span>
@@ -35,16 +52,18 @@ function Card({ id, marque, modèle, year, status, prixParJour, type, fuel }) {
                 <span className="car-year">{year || '2023'}</span>
             </div>
 
-            {/* Middle Row: Specifications Divider */}
+            {/* Middle Row: Specifications */}
             <div className="car-specs-row">
                 <div className="spec-item">
                     <i className="bi bi-fuel-pump"></i>
                     <span>{fuel || 'Essence'}</span>
                 </div>
-                <div className="spec-item">
-                    <i className="bi bi-gear"></i>
-                    <span>{type ? 'Auto' : 'Manuel'}</span> 
-                </div>
+                {transmission && (
+                    <div className="spec-item">
+                        <i className="bi bi-gear"></i>
+                        <span>{transmission}</span>
+                    </div>
+                )}
             </div>
 
             <hr className="card-divider" />
@@ -55,15 +74,21 @@ function Card({ id, marque, modèle, year, status, prixParJour, type, fuel }) {
                     <span className="price-amount">{prixParJour} DH</span>
                     <span className="price-unit">/ jour</span>
                 </div>
-                
-                <a 
-                    href={whatsappUrl} 
-                    target="_blank" 
-                    rel="noopener noreferrer" 
-                    className="card-book-btn"
-                >
-                    Réserver
-                </a>
+
+                {isUnavailable ? (
+                    <span className="card-book-btn card-book-btn-disabled" aria-disabled="true">
+                        Indisponible
+                    </span>
+                ) : (
+                    <a
+                        href={whatsappUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="card-book-btn"
+                    >
+                        Réserver
+                    </a>
+                )}
             </div>
         </div>
     );

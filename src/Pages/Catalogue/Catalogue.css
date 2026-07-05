@@ -1,14 +1,14 @@
-/* --- Design Tokens (Your Brand Theme) --- */
+/* --- Design Tokens (Casablanca Location brand theme) --- */
 :root {
   --bg-main: #FFF8F0;          /* Warm cream background */
   --bg-card: #ffffff;          /* Pure white for card assets */
-  --primary: #7C2D12;          /* Rich terracotta / deep rust */
-  --primary-hover: #9a3412;    /* Slightly brighter rust for hovers */
-  --secondary: #1E293B;        /* Deep slate blue for text and borders */
-  --accent: #0F766E;           /* Elegant teal for focus interactive details */
-  --hover-light: #faedcd;      /* Light accent cream for secondary actions */
+  --primary: #b3552c;          /* Rust / terracotta */
+  --primary-hover: #9a4623;    /* Darker rust for hovers */
+  --secondary: #1f2733;        /* Navy for text and borders */
+  --accent: #0F766E;           /* Teal for focus/interactive details */
+  --hover-light: #faedcd;      /* Light cream for secondary actions */
   --whatsapp: #008000;         /* Standard green for reservation pathways */
-  
+
   --radius-sm: 6px;
   --radius-md: 8px;
   --transition-fast: 0.2s ease;
@@ -17,18 +17,17 @@
 /* --- Global Settings & Document Reset --- */
 body {
   margin: 0;
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  font-family: 'Roboto Mono', monospace;
   background-color: var(--bg-main);
   color: var(--secondary);
   -webkit-font-smoothing: antialiased;
 }
 
-/* Typography Headings Structure */
 h1 {
   text-align: center;
   font-size: 2.2rem;
   margin: 40px 0 8px 0;
-  color: var(--primary); /* Keeps main title visually on-brand */
+  color: var(--primary);
 }
 
 p {
@@ -39,65 +38,128 @@ p {
   margin: 0 0 30px 0;
 }
 
-/* --- 1. Filters Bar Layout Layer --- */
+/* Visually hidden but still available to screen readers */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* --- 1. Filters Bar Layout --- */
 .filters-container {
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 16px;
-  flex-wrap: wrap; /* Gracefully wraps options vertically on smaller viewports */
+  flex-wrap: wrap;
   max-width: 1200px;
-  margin: 0 auto 40px auto;
+  margin: 0 auto 24px auto;
   padding: 0 20px;
 }
 
-/* Share font inheritance for form items */
+.filter-field {
+  display: flex;
+}
+
 .filters-container select,
-.filters-container button,
 .pagination button {
   font-family: inherit;
   outline: none;
   transition: all var(--transition-fast);
 }
 
-/* Dropdown native <select> elements */
-.filters-container select {
-  background-color: var(--bg-card);
-  border: 1px solid rgba(30, 41, 59, 0.15); /* Uses a subtle bleed of your slate blue */
-  border-radius: var(--radius-md);
-  padding: 12px 16px;
-  font-size: 14px;
-  color: var(--secondary);
-  cursor: pointer;
-  min-width: 160px;
+/* Search input + icon */
+.search-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
 }
 
-/* Custom soft teal interactive focus glow */
-.filters-container select:focus {
+.search-wrapper .search-icon {
+  position: absolute;
+  left: 14px;
+  color: var(--secondary);
+  opacity: 0.5;
+  font-size: 14px;
+  pointer-events: none;
+}
+
+.search-wrapper input {
+  font-family: inherit;
+  background-color: var(--bg-card);
+  border: 1px solid rgba(31, 39, 51, 0.15);
+  border-radius: var(--radius-md);
+  padding: 12px 16px 12px 38px;
+  font-size: 14px;
+  color: var(--secondary);
+  min-width: 220px;
+  outline: none;
+  transition: all var(--transition-fast);
+}
+
+.search-wrapper input:focus {
   border-color: var(--accent);
   box-shadow: 0 0 0 3px rgba(15, 118, 110, 0.15);
 }
 
-/* Main Action Filter Trigger Button */
-.filters-container button {
-  background-color: var(--primary);
-  color: #ffffff;
-  border: none;
+.search-wrapper input:hover {
+  border-color: rgba(179, 85, 44, 0.4);
+}
+
+/* Dropdown native <select> elements */
+.filters-container select {
+  background-color: var(--bg-card);
+  border: 1px solid rgba(31, 39, 51, 0.15);
   border-radius: var(--radius-md);
-  padding: 12px 28px;
-  font-size: 15px;
-  font-weight: 600;
+  padding: 12px 40px 12px 16px;
+  font-size: 14px;
+  color: var(--secondary);
   cursor: pointer;
+  min-width: 170px;
+
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%23b3552c' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><polyline points='6 9 12 15 18 9'></polyline></svg>");
+  background-repeat: no-repeat;
+  background-position: right 14px center;
+  background-size: 16px;
 }
 
-.filters-container button:hover {
-  background-color: var(--primary-hover);
+.filters-container select:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(15, 118, 110, 0.15);
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%230F766E' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><polyline points='18 15 12 9 6 15'></polyline></svg>");
 }
 
-/* --- 2. Cars 9-Card Fluid Grid Layout --- */
+.filters-container select:hover {
+  border-color: rgba(179, 85, 44, 0.4);
+}
+
+/* --- Results count bar --- */
+.catalogue-results-bar {
+  max-width: 1200px;
+  margin: 0 auto 24px auto;
+  padding: 0 20px;
+  text-align: center;
+}
+
+.catalogue-results-count {
+  font-size: 14px;
+  color: var(--secondary);
+  opacity: 0.7;
+}
+
+/* --- 2. Cars Fluid Grid Layout --- */
 .cars-list-container {
   display: grid;
-  /* Responsively handles your 9-card structures depending on desktop monitor space */
   grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
   gap: 24px;
   max-width: 1200px;
@@ -105,17 +167,39 @@ p {
   padding: 0 80px;
 }
 
-/* Empty State Fallback Alert Text */
+/* Empty State Fallback */
 .no-results {
-  grid-column: 1 / -1; /* Forces text centered fully across all hidden columns */
+  grid-column: 1 / -1;
   text-align: center;
-  color: var(--secondary);
-  opacity: 0.6;
-  font-size: 1.2rem;
   padding: 40px 0;
 }
 
-/* --- 3. Pagination Controls Layer --- */
+.no-results p {
+  color: var(--secondary);
+  opacity: 0.6;
+  font-size: 1.2rem;
+  margin-bottom: 16px;
+}
+
+.reset-filters-btn {
+  background-color: transparent;
+  color: var(--primary);
+  border: 2px solid var(--primary);
+  border-radius: var(--radius-md);
+  padding: 10px 24px;
+  font-size: 14px;
+  font-weight: 600;
+  font-family: inherit;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.reset-filters-btn:hover {
+  background-color: var(--primary);
+  color: #ffffff;
+}
+
+/* --- 3. Pagination Controls --- */
 .pagination {
   display: flex;
   justify-content: center;
@@ -124,10 +208,9 @@ p {
   margin-bottom: 60px;
 }
 
-/* Pagination arrows buttons */
 .pagination button {
   background-color: var(--bg-card);
-  border: 1px solid rgba(30, 41, 59, 0.15);
+  border: 1px solid rgba(31, 39, 51, 0.15);
   color: var(--secondary);
   padding: 10px 20px;
   border-radius: var(--radius-sm);
@@ -136,35 +219,32 @@ p {
   cursor: pointer;
 }
 
-/* Interactive Pagination Hover State mapped to your theme colors */
 .pagination button:hover:not(:disabled) {
-  background-color: var(--hover-light); /* Uses your soft yellow/cream accent */
+  background-color: var(--hover-light);
   border-color: var(--primary);
   color: var(--primary);
 }
 
-/* Disabled button safeguards (When user is stuck on page 1 or the final page) */
 .pagination button:disabled {
-  background-color: rgba(30, 41, 59, 0.05);
-  border-color: rgba(30, 41, 59, 0.1);
-  color: rgba(30, 41, 59, 0.4);
+  background-color: rgba(31, 39, 51, 0.05);
+  border-color: rgba(31, 39, 51, 0.1);
+  color: rgba(31, 39, 51, 0.4);
   cursor: not-allowed;
   opacity: 0.6;
 }
 
-/* Active Page Middle Text Counter */
 .page-indicator {
   font-size: 15px;
   color: var(--secondary);
   padding: 0 10px;
-  user-select: none; /* Prevents awkward accidental textual highlight dragging on double clicks */
+  user-select: none;
 }
 
 .page-indicator strong {
   color: var(--primary);
 }
 
-/* --- WhatsApp Utility Class for Reservation Action Modules --- */
+/* --- WhatsApp Utility Class --- */
 .btn-whatsapp {
   background-color: var(--whatsapp);
   color: #ffffff;
@@ -177,27 +257,22 @@ p {
   opacity: 0.9;
 }
 
-
-
-
-/* --- Preview Section Container --- */
+/* --- Preview Section (homepage "page === false" mode) --- */
 .catalogue-section {
   max-width: 1200px;
   margin: 60px auto;
   padding: 0 20px;
 }
 
-/* Heading for the preview widget */
 .catalogue-title {
   text-align: center;
   font-size: 2rem;
   font-weight: 700;
-  color: var(--primary); /* Deep terracotta brand color */
+  color: var(--primary);
   margin-bottom: 32px;
   position: relative;
 }
 
-/* Section Grid (Shares properties with your main container but targeted here) */
 .cars-container {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
@@ -205,7 +280,6 @@ p {
   margin-bottom: 40px;
 }
 
-/* --- Redirection Link Container & Button --- */
 .view-more-container {
   display: flex;
   justify-content: center;
@@ -227,20 +301,37 @@ p {
   transition: all var(--transition-fast);
 }
 
-/* Hover effect flips colors with a sleek lift */
 .view-more-btn:hover {
   background-color: var(--primary);
   color: #ffffff;
   transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(124, 45, 18, 0.15);
+  box-shadow: 0 4px 12px rgba(179, 85, 44, 0.2);
 }
 
-/* Icon transition inside the button */
 .view-more-btn i {
   font-size: 16px;
   transition: transform var(--transition-fast);
 }
 
 .view-more-btn:hover i {
-  transform: translateX(4px); /* Moves the arrow slightly right on hover */
+  transform: translateX(4px);
+}
+
+/* --- Responsive tweaks --- */
+@media (max-width: 640px) {
+  .cars-list-container {
+    padding: 0 20px;
+  }
+
+  .filters-container {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .filter-field,
+  .search-wrapper input,
+  .filters-container select {
+    width: 100%;
+    min-width: unset;
+  }
 }

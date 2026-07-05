@@ -2,20 +2,56 @@
 
 .car-rental-card {
   background-color: var(--bg-card);
-  border: 1px solid rgba(30, 41, 59, 0.08);
+  border: 1px solid rgba(31, 39, 51, 0.08);
   border-radius: 12px;
   padding: 24px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  box-shadow: 0 4px 6px -1px rgba(124, 45, 18, 0.03), 0 2px 4px -2px rgba(124, 45, 18, 0.03);
+  box-shadow: 0 4px 6px -1px rgba(179, 85, 44, 0.03), 0 2px 4px -2px rgba(179, 85, 44, 0.03);
   transition: transform var(--transition-fast), box-shadow var(--transition-fast);
 }
 
 /* Elevate card slightly on hover */
 .car-rental-card:hover {
   transform: translateY(-4px);
-  box-shadow: 0 12px 20px -8px rgba(30, 41, 59, 0.08);
+  box-shadow: 0 12px 20px -8px rgba(31, 39, 51, 0.08);
+}
+
+/* --- Photo --- */
+.card-image-wrapper {
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  border-radius: 8px;
+  overflow: hidden;
+  margin-bottom: 16px;
+  background-color: var(--hover-light);
+}
+
+.card-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.3s ease;
+}
+
+.car-rental-card:hover .card-image {
+  transform: scale(1.04);
+}
+
+.card-image-placeholder {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--primary);
+  opacity: 0.4;
+}
+
+.card-image-placeholder i {
+  font-size: 2.5rem;
 }
 
 /* --- Top Row: Meta Tags & Badges --- */
@@ -51,13 +87,13 @@
 }
 
 .car-status-pill.rented {
-  background-color: rgba(30, 41, 59, 0.08);
+  background-color: rgba(31, 39, 51, 0.08);
   color: var(--secondary);
   opacity: 0.8;
 }
 
 .car-status-pill.maintenance {
-  background-color: rgba(124, 45, 18, 0.1);
+  background-color: rgba(179, 85, 44, 0.1);
   color: var(--primary);
 }
 
@@ -104,7 +140,7 @@
 /* Divider Line */
 .card-divider {
   border: 0;
-  border-top: 1px solid rgba(30, 41, 59, 0.08);
+  border-top: 1px solid rgba(31, 39, 51, 0.08);
   margin: 0 0 16px 0;
 }
 
@@ -124,7 +160,7 @@
 .price-amount {
   font-size: 1.4rem;
   font-weight: 700;
-  color: var(--primary); /* Price highlighted in primary terracotta */
+  color: var(--primary); /* Price highlighted in primary rust */
 }
 
 .price-unit {
@@ -156,4 +192,17 @@
 
 .card-book-btn:active {
   transform: scale(0.98);
+}
+
+/* Disabled state for unavailable cars (rented / in maintenance) */
+.card-book-btn-disabled {
+  background-color: rgba(31, 39, 51, 0.12);
+  color: var(--secondary);
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.card-book-btn-disabled:hover {
+  background-color: rgba(31, 39, 51, 0.12);
+  transform: none;
 }
