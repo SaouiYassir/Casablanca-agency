@@ -42,7 +42,7 @@ function Contact() {
             <div className="contact-map">
                 <iframe
                     title="Localisation Casablanca Location"
-                    src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d4893.47389997062!2d-8.043333087877913!3d31.588215101498943!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xdafef33724827bf%3A0x3ba431ba5cc62a46!2sCIH%20MARRAKECH!5e0!3m2!1sfr!2sma!4v1782326705997!5m2!1sfr!2sma"
+                    src="https://maps.google.com/maps?q=Boulevard%20de%20la%20Corniche%2C%20Casablanca%2C%20Maroc&t=&z=15&ie=UTF8&iwloc=&output=embed"
                     width="100%"
                     height="350"
                     style={{ border: 0 }}

@@ -57,14 +57,29 @@ function About() {
                 </div>
             </div>
 
+            {/* Legal registration proof — big trust signal in Morocco per spec 3.6.
+                Values below are placeholders — replace with the agency's real
+                RC / ICE numbers before this goes live. */}
+            <div className="about-legal">
+                <div className="about-legal-item">
+                    <span className="about-legal-label">RC</span>
+                    <span className="about-legal-value">XXXXX</span>
+                </div>
+                <div className="about-legal-item">
+                    <span className="about-legal-label">ICE</span>
+                    <span className="about-legal-value">XXXXXXXXXXXXXXX</span>
+                </div>
+                <div className="about-legal-item">
+                    <span className="about-legal-label">Adresse</span>
+                    <span className="about-legal-value">À compléter — Casablanca</span>
+                </div>
+            </div>
+
             <div className="about-cta">
                 <div className="cta-text">
                     <span className="cta-title">Pret a prendre la route ?</span>
                     <span className="cta-subtitle">Decouvrez notre catalogue et reservez en quelques clics.</span>
                 </div>
-                {/* <Link to="/all-cars">
-                    <button className="cta-btn">Voir le catalogue</button>
-                </Link> */}
                 <button className="cta-btn" onClick={() => window.open('/all-cars', '_parent')}>Voir le catalogue</button>
             </div>
 

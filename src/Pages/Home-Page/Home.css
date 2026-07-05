@@ -233,6 +233,10 @@
     white-space: nowrap;
 }
 
+#fleet {
+    margin-bottom: 40px;
+}
+
 /* ===================== RESPONSIVE ===================== */
 
 @media screen and (max-width: 1024px) {

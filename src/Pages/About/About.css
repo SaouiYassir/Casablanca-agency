@@ -1,13 +1,13 @@
 .about-page {
-  font-family: 'Roboto Mono', monospace;
+  font-family: var(--font-body);
   max-width: 1100px;
   margin: 0 auto;
-  padding: 80px 0;
+  padding: 120px 20px 80px;
 }
 
 .about-hero {
-  background: #1f2733;
-  border-radius: 10px;
+  background: var(--ink);
+  border-radius: 12px;
   padding: 3rem 1.5rem;
   margin-bottom: 2.5rem;
   display: flex;
@@ -16,9 +16,10 @@
 }
 
 .about-hero h2 {
-  color: #ffffff;
-  font-size: 1.7rem;
-  font-weight: 500;
+  color: var(--bg);
+  font-family: var(--font-display);
+  font-size: 1.8rem;
+  font-weight: 600;
   margin: 0;
   text-align: center;
 }
@@ -31,33 +32,34 @@
 }
 
 .about-story {
-  background: #ffffff;
-  border: 1px solid #e6e0d8;
-  border-radius: 10px;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 12px;
   padding: 1.75rem;
   display: flex;
   flex-direction: column;
 }
 
 .section-label {
-  color: #b3552c;
+  color: var(--brand);
   font-size: 0.75rem;
-  font-weight: 500;
+  font-weight: 600;
   letter-spacing: 0.5px;
   text-transform: uppercase;
   margin-bottom: 0.75rem;
 }
 
 .about-story p {
-  color: #6b6459;
-  font-size: 0.85rem;
+  color: var(--ink-muted);
+  font-size: 0.9rem;
   line-height: 1.7;
   margin: 0;
+  text-align: left;
 }
 
 .about-stats {
-  background: #1f2733;
-  border-radius: 10px;
+  background: var(--ink);
+  border-radius: 12px;
   padding: 1.75rem;
   display: flex;
   flex-direction: column;
@@ -69,7 +71,7 @@
   display: flex;
   align-items: baseline;
   justify-content: space-between;
-  border-bottom: 1px solid #313b49;
+  border-bottom: 1px solid rgba(250, 247, 242, 0.12);
   padding-bottom: 0.75rem;
 }
 
@@ -79,14 +81,15 @@
 }
 
 .stat-number {
-  color: #d98a5e;
-  font-size: 1.1rem;
-  font-weight: 500;
+  font-family: var(--font-display);
+  color: var(--accent);
+  font-size: 1.2rem;
+  font-weight: 600;
 }
 
 .stat-label {
-  color: #f3e3da;
-  font-size: 0.8rem;
+  color: var(--bg);
+  font-size: 0.85rem;
 }
 
 .about-why {
@@ -94,9 +97,10 @@
 }
 
 .about-why h3 {
-  color: #b3552c;
-  font-size: 1.1rem;
-  font-weight: 500;
+  color: var(--brand);
+  font-family: var(--font-display);
+  font-size: 1.2rem;
+  font-weight: 600;
   text-align: center;
   margin: 0 0 1.5rem;
 }
@@ -108,31 +112,64 @@
 }
 
 .why-card {
-  background: #ffffff;
-  border: 1px solid #e6e0d8;
-  border-radius: 10px;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 12px;
   padding: 1.5rem 1.25rem;
   text-align: center;
 }
 
 .why-title {
   display: block;
-  color: #1f2733;
-  font-size: 0.85rem;
-  font-weight: 500;
+  color: var(--ink);
+  font-size: 0.9rem;
+  font-weight: 600;
   margin-bottom: 0.5rem;
 }
 
 .why-card p {
-  color: #6b6459;
-  font-size: 0.78rem;
+  color: var(--ink-muted);
+  font-size: 0.82rem;
   line-height: 1.6;
   margin: 0;
 }
 
+/* --- Legal / trust proof (spec 3.6) --- */
+.about-legal {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 1.5rem 1.75rem;
+  margin-bottom: 2.5rem;
+  display: flex;
+  gap: 2rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.about-legal-item {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  text-align: center;
+}
+
+.about-legal-label {
+  font-size: 0.72rem;
+  color: var(--ink-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+}
+
+.about-legal-value {
+  font-size: 0.9rem;
+  color: var(--ink);
+  font-weight: 600;
+}
+
 .about-cta {
-  background: #1f2733;
-  border-radius: 10px;
+  background: var(--ink);
+  border-radius: 12px;
   padding: 1.75rem 2rem;
   display: flex;
   align-items: center;
@@ -148,36 +185,42 @@
 }
 
 .cta-title {
-  color: #f3e3da;
-  font-size: 0.95rem;
-  font-weight: 500;
+  color: var(--bg);
+  font-family: var(--font-display);
+  font-size: 1rem;
+  font-weight: 600;
 }
 
 .cta-subtitle {
-  color: #a9b2bd;
-  font-size: 0.8rem;
+  color: var(--ink-muted);
+  font-size: 0.85rem;
 }
 
 .cta-btn {
-  background: #b3552c;
+  background: var(--brand);
   color: #ffffff;
-  font-family: 'Roboto Mono', monospace;
-  font-weight: 500;
-  font-size: 0.85rem;
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 0.9rem;
   border: none;
-  border-radius: 6px;
+  border-radius: 8px;
   padding: 12px 22px;
   cursor: pointer;
   white-space: nowrap;
-  transition: background 0.2s ease, transform 0.1s ease;
+  transition: background 0.18s ease, transform 0.1s ease;
 }
 
 .cta-btn:hover {
-  background: #9c4823;
+  background: var(--brand-deep);
 }
 
 .cta-btn:active {
   transform: scale(0.98);
+}
+
+.cta-btn:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
 }
 
 @media (max-width: 800px) {
@@ -195,6 +238,6 @@
   }
 
   .about-page {
-    padding: 80px 30px;
+    padding: 100px 20px 60px;
   }
 }

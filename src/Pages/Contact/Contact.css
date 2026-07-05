@@ -1,9 +1,8 @@
 .contact-page {
-  font-family: 'Roboto Mono', monospace;
+  font-family: var(--font-body);
   max-width: 1100px;
   margin: 0 auto;
-  padding: 3rem 1.5rem 4rem;
-  padding: 100px 0;
+  padding: 120px 20px 80px;
 }
 
 .contact-header {
@@ -12,15 +11,16 @@
 }
 
 .contact-header h2 {
-  color: #b3552c;
-  font-size: 1.7rem;
-  font-weight: 500;
+  color: var(--ink);
+  font-family: var(--font-display);
+  font-size: 1.9rem;
+  font-weight: 600;
   margin: 0 0 0.5rem;
 }
 
 .contact-header p {
-  color: #6b6459;
-  font-size: 0.9rem;
+  color: var(--ink-muted);
+  font-size: 0.95rem;
   margin: 0;
 }
 
@@ -32,8 +32,8 @@
 }
 
 .contact-info {
-  background: #1f2733;
-  border-radius: 10px;
+  background: var(--ink);
+  border-radius: 12px;
   padding: 1.75rem;
   display: flex;
   flex-direction: column;
@@ -53,32 +53,32 @@
 }
 
 .info-label {
-  color: #d98a5e;
-  font-size: 0.7rem;
-  font-weight: 500;
+  color: var(--accent);
+  font-size: 0.72rem;
+  font-weight: 600;
   letter-spacing: 0.5px;
   text-transform: uppercase;
 }
 
 .info-value {
-  color: #f3e3da;
-  font-size: 0.85rem;
+  color: var(--bg);
+  font-size: 0.88rem;
   line-height: 1.5;
 }
 
 .whatsapp-btn {
   margin-top: 1.75rem;
   width: 100%;
-  background: #25d366;
-  color: #0d2b17;
-  font-family: 'Roboto Mono', monospace;
-  font-weight: 500;
-  font-size: 0.85rem;
+  background: var(--whatsapp);
+  color: #ffffff;
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 0.88rem;
   border: none;
-  border-radius: 6px;
+  border-radius: 8px;
   padding: 12px 0;
   cursor: pointer;
-  transition: background 0.2s ease, transform 0.1s ease;
+  transition: background 0.18s ease, transform 0.1s ease;
 }
 
 .whatsapp-btn:hover {
@@ -87,6 +87,11 @@
 
 .whatsapp-btn:active {
   transform: scale(0.98);
+}
+
+.whatsapp-btn:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
 }
 
 .contact-form-wrapper {
@@ -113,9 +118,9 @@
 }
 
 .contact-map {
-  border-radius: 10px;
+  border-radius: 12px;
   overflow: hidden;
-  border: 1px solid #e6e0d8;
+  border: 1px solid var(--line);
 }
 
 .contact-map iframe {
@@ -129,6 +134,6 @@
   }
 
   .contact-page {
-    padding: 100px 30px;
+    padding: 100px 20px 60px;
   }
 }
