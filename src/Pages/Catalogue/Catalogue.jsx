@@ -1,6 +1,7 @@
 import './Catalogue.css'
 import React, { useState, useMemo, useEffect } from 'react';
 import Card from '../../Components/Card/Card.jsx';
+import CardSkeleton from '../../Components/SkeletonCard/SkeletonCard.jsx';
 
 const STATIC_CARS = [
   { id: 1, marque: "Peugeot", modèle: "208", année: 2022, prixParJour: 45, status: "Disponible", type: "Citadine", fuel: "Essence", image: "https://images.unsplash.com/photo-1619767886558-efdc259cde1a?w=500&q=80" },
@@ -50,12 +51,17 @@ const PRICE_RANGES = [
 const categories = ["Tous", ...new Set(STATIC_CARS.map(car => car.type))];
 const fuels = ["Tous", ...new Set(STATIC_CARS.map(car => car.fuel))];
 
+
+const FAKE_LOADING_DELAY = 500;
+
+
 function Catalogue({ page }) {
   const [selectedCategory, setSelectedCategory] = useState("Tous");
   const [selectedFuel, setSelectedFuel] = useState("Tous");
   const [selectedPriceRange, setSelectedPriceRange] = useState(PRICE_RANGES[0].label);
   const [searchTerm, setSearchTerm] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
+  const [isLoading, setIsLoading] = useState(true);
 
   // Reactive filtering: every dropdown/search change recomputes this list
   // immediately, combined with AND logic (a car must match all active filters).
@@ -80,6 +86,13 @@ function Catalogue({ page }) {
   // can land on an empty page if the new result set is shorter.
   useEffect(() => {
     setCurrentPage(1);
+    setIsLoading(true);
+
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+    }, FAKE_LOADING_DELAY);
+
+    return () => clearTimeout(timer);
   }, [selectedCategory, selectedFuel, selectedPriceRange, searchTerm]);
 
   const totalPages = Math.ceil(filteredCars.length / CARDS_PER_PAGE);
@@ -193,7 +206,11 @@ function Catalogue({ page }) {
       </div>
 
       <div className="cars-list-container">
-        {currentCars.length > 0 ? (
+        {isLoading ? (
+          Array.from({ length: CARDS_PER_PAGE }).map((_, i) => (
+            <CardSkeleton key={`skeleton-${i}`} />
+          ))
+        ) : currentCars.length > 0 ? (
           currentCars.map((car) => (
             <Card
               key={car.id}
@@ -218,7 +235,7 @@ function Catalogue({ page }) {
         )}
       </div>
 
-      {totalPages > 1 && (
+      {!isLoading && totalPages > 1 && (
         <div className="pagination">
           <button
             onClick={() => setCurrentPage(prev => Math.max(prev - 1, 1))}
