@@ -1,0 +1,316 @@
+.form {
+
+    width: 100%;
+
+    background: var(--surface, #ffffff);
+
+    border: 1px solid var(--line, #e8e1d6);
+
+    border-radius: 16px;
+
+    padding: 36px;
+
+    box-shadow: 0 2px 8px rgba(26, 22, 19, 0.04);
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 20px;
+
+}
+
+
+/* Input groups */
+
+.input-group {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 8px;
+
+}
+
+
+
+.input-group label {
+
+    font-family: "Inter", sans-serif;
+
+    font-size: 14px;
+
+    font-weight: 600;
+
+    color: var(--ink, #1a1613);
+
+}
+
+
+/* Inputs */
+
+.input-group input,
+.input-group textarea {
+
+
+    width: 100%;
+
+    box-sizing: border-box;
+
+
+    padding: 14px 16px;
+
+
+    font-family: "Inter", sans-serif;
+
+    font-size: 15px;
+
+
+    color: var(--ink, #1a1613);
+
+    background: #ffffff;
+
+
+    border: 1px solid var(--line, #e8e1d6);
+
+    border-radius: 8px;
+
+
+    outline: none;
+
+
+    transition:
+        border-color .18s ease,
+        box-shadow .18s ease;
+
+}
+
+
+
+.input-group input {
+
+    height: 48px;
+
+}
+
+
+
+.input-group textarea {
+
+    min-height: 140px;
+
+    resize: vertical;
+
+    line-height: 1.6;
+
+}
+
+
+/* Placeholder */
+
+.input-group input::placeholder,
+.input-group textarea::placeholder {
+
+    color: #a49b91;
+
+}
+
+
+
+/* Focus */
+
+.input-group input:focus,
+.input-group textarea:focus {
+
+
+    border-color: var(--brand, #c0392b);
+
+
+    box-shadow:
+        0 0 0 3px rgba(192,57,43,.12);
+
+}
+
+
+
+/* Message textarea */
+
+.message-group {
+
+    margin-top: 4px;
+
+}
+
+
+
+/* Honeypot hidden */
+
+.form-honeypot {
+
+    position: absolute;
+
+    left: -9999px;
+
+    opacity: 0;
+
+}
+
+
+
+/* Button */
+
+.send-butt {
+
+
+    width: 100%;
+
+    height: 48px;
+
+
+    border: none;
+
+    border-radius: 8px;
+
+
+    background: var(--brand, #c0392b);
+
+    color: white;
+
+
+    font-family: "Inter", sans-serif;
+
+    font-size: 15px;
+
+    font-weight: 600;
+
+
+    cursor: pointer;
+
+
+    transition:
+        background .18s ease,
+        transform .18s ease;
+
+}
+
+
+
+.send-butt:hover {
+
+    background: var(--brand-deep, #8b2a20);
+
+    transform: translateY(-1px);
+
+}
+
+
+
+.send-butt:disabled {
+
+    opacity: .65;
+
+    cursor: not-allowed;
+
+    transform:none;
+
+}
+
+
+
+/* Status messages */
+
+.form-status {
+
+
+    margin: 4px 0 0;
+
+
+    padding: 12px 14px;
+
+
+    border-radius: 8px;
+
+
+    font-family:"Inter",sans-serif;
+
+    font-size:14px;
+
+    line-height:1.5;
+
+}
+
+
+
+/* Success */
+
+.form-status.success {
+
+    background: rgba(47,143,91,.1);
+
+    color:#2f8f5b;
+
+}
+
+
+/* Error */
+
+.form-status.error {
+
+    background: rgba(192,57,43,.1);
+
+    color:#8b2a20;
+
+}
+
+
+/* Not configured */
+
+.form-status.unconfigured {
+
+    background: rgba(212,162,76,.15);
+
+    color:#8a6525;
+
+}
+
+
+
+/* Mobile */
+
+@media(max-width:640px){
+
+
+    .form {
+
+        padding:24px;
+
+        border-radius:12px;
+
+    }
+
+
+    .input-group input,
+    .input-group textarea {
+
+        font-size:16px;
+
+    }
+
+}
+
+
+
+/* Reduced motion */
+
+@media(prefers-reduced-motion:reduce){
+
+    .send-butt,
+    .input-group input,
+    .input-group textarea {
+
+        transition:none;
+
+    }
+
+}
