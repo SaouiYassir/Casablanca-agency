@@ -1,6 +1,6 @@
 import { useEffect, useId, useState } from 'react'
 import { Link, NavLink } from 'react-router-dom'
-// import agency from '../../Config/Agency.js'
+import agency from '../../Config/Agency.js'
 import './Header.css'
 
 const links = [
@@ -43,9 +43,8 @@ function Header() {
 
   return (
     <header className="header">
-      <Link className="logo" to="/" > 
-        {/* {agency.name}    aria-label={`${agency.name} — Accueil`}  */}
-        Casablanca Agency
+      <Link className="logo" to="/" aria-label={`${agency.name} — Accueil`} > 
+        {agency.name}
       </Link>
       <nav className="nav-links" aria-label="Navigation principale">{renderNavItems()}</nav>
       <button
