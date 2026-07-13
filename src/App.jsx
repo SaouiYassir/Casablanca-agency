@@ -4,6 +4,7 @@ import Header from './Components/Header/Header.jsx'
 import Footer from './Components/Footer/Footer.jsx'
 import Home from './Pages/Home/Home.jsx'
 import Catalogue from './Pages/Catalogue/Catalogue.jsx'
+import NotFound from 'c:/Users/yassi/Desktop/Portfolio/src/Pages/NotFound/NotFound.jsx'
 import './App.css'
 
 function App() {
@@ -17,7 +18,7 @@ function App() {
           <Route path='/all-cars' element={<Catalogue />} />
           {/* <Route path='/about' element={<About />} /> */}
           {/* <Route path='/contact' element={<Contact />} /> */}
-          {/* <Route path='*' element={<NotFound />} /> */}
+          <Route path='*' element={<NotFound />} />
         </Routes>
         <Footer />
       </BrowserRouter>
