@@ -6,7 +6,7 @@ import Home from './Pages/Home/Home.jsx'
 import Catalogue from './Pages/Catalogue/Catalogue.jsx'
 import About from './Pages/About/About.jsx'
 import Contact from './Pages/Contact/Contact.jsx'
-import NotFound from 'c:/Users/yassi/Desktop/Portfolio/src/Pages/NotFound/NotFound.jsx'
+import NotFound from './Pages/NotFound/NotFound.jsx'
 
 function App() {
 
