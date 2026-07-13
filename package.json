@@ -1,5 +1,5 @@
 {
-  "name": "my-react-app",
+  "name": "casablanca-location",
   "private": true,
   "version": "0.0.0",
   "type": "module",
@@ -7,15 +7,15 @@
     "dev": "vite",
     "build": "vite build",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "check": "npm run lint && npm run build"
   },
   "dependencies": {
     "@emailjs/browser": "^4.4.1",
     "bootstrap-icons": "^1.13.1",
     "react": "^19.2.6",
     "react-dom": "^19.2.6",
-    "react-router-dom": "^7.18.1",
-    "styled-components": "^6.4.3"
+    "react-router-dom": "^7.18.1"
   },
   "devDependencies": {
     "@eslint/js": "^10.0.1",

@@ -1,50 +1,74 @@
-import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom'
+import { useEffect, useId, useState } from 'react'
+import { Link, NavLink } from 'react-router-dom'
+import agency from '../../Config/Agency.js'
 import './Header.css'
 
+const links = [
+  { to: '/', label: 'Accueil' },
+  { to: '/all-cars', label: 'Catalogue' },
+  { to: '/about', label: 'À propos' },
+  { to: '/contact', label: 'Contact' },
+]
+
 function Header() {
-    const [isOpen, setIsOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(false)
+  const menuId = useId()
 
-    const toggleMenu = () => {
-        setIsOpen(!isOpen);
-    };
+  useEffect(() => {
+    if (!isOpen) return undefined
 
-    const handleLinkClick = () => {
-        setIsOpen(false);
-        window.scrollTo({
-            top: 0,
-            left: 0,
-            behavior: 'smooth'
-        });
-    };
+    const handleEscape = (event) => {
+      if (event.key === 'Escape') setIsOpen(false)
+    }
 
-    return (
+    document.body.style.overflow = 'hidden'
+    document.addEventListener('keydown', handleEscape)
+    return () => {
+      document.body.style.overflow = ''
+      document.removeEventListener('keydown', handleEscape)
+    }
+  }, [isOpen])
 
-        <header className="header">
-            <div className="logo" onClick={() => window.scrollTo({top: 0, left: 0, behavior: 'smooth'})}>Casablanca Location</div>
-            <nav className="nav-links">
-                <Link to="/" onClick={() => window.scrollTo({top: 0, left: 0, behavior: 'smooth'})}>Home</Link>
-                <Link to="/about" onClick={() => window.scrollTo({top: 0, left: 0, behavior: 'smooth'})}>About</Link>
-                <Link to="/all-cars" onClick={() => window.scrollTo({top: 0, left: 0, behavior: 'smooth'})}>Catalogue</Link>
-                <Link to="/contact" onClick={() => window.scrollTo({top: 0, left: 0, behavior: 'smooth'})}>Contact</Link>
-            </nav>
+  const renderNavItems = () => links.map(({ to, label }) => (
+    <NavLink
+      key={to}
+      to={to}
+      end={to === '/'}
+      className={({ isActive }) => (isActive ? 'active' : undefined)}
+      onClick={() => setIsOpen(false)}
+    >
+      {label}
+    </NavLink>
+  ))
 
-            <div className="header-actions">
-                <div className={`hamburger ${isOpen ? 'active' : ''}`} onClick={toggleMenu}>
-                    <span className="bar"></span>
-                    <span className="bar"></span>
-                    <span className="bar"></span>
-                </div>
-            </div>
-
-            <nav className={`nav ${isOpen ? 'active' : ''}`}>
-                <Link to="/" onClick={handleLinkClick}>Home</Link>
-                <Link to="/about" onClick={handleLinkClick}>About</Link>
-                <Link to="/all-cars" onClick={handleLinkClick}>Catalogue</Link>
-                <Link to="/contact" onClick={handleLinkClick}>Contact</Link>     
-            </nav>
-        </header>
-    );
+  return (
+    <header className="header">
+      <Link className="logo" to="/" aria-label={`${agency.name} — Accueil`}>
+        {agency.name}
+      </Link>
+      <nav className="nav-links" aria-label="Navigation principale">{renderNavItems()}</nav>
+      <button
+        type="button"
+        className={`hamburger ${isOpen ? 'active' : ''}`}
+        onClick={() => setIsOpen((current) => !current)}
+        aria-expanded={isOpen}
+        aria-controls={menuId}
+        aria-label={isOpen ? 'Fermer le menu' : 'Ouvrir le menu'}
+      >
+        <span className="bar" />
+        <span className="bar" />
+        <span className="bar" />
+      </button>
+      <nav
+        id={menuId}
+        className={`nav ${isOpen ? 'active' : ''}`}
+        aria-label="Navigation mobile"
+        aria-hidden={!isOpen}
+      >
+        {renderNavItems()}
+      </nav>
+    </header>
+  )
 }
 
-export default Header;
+export default Header
