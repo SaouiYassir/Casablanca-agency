@@ -1,0 +1,225 @@
+/* ==========================================================================
+   Header
+   ========================================================================== */
+
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 72px;
+  padding: 0 var(--space-7, 48px);
+  background: rgba(255, 255, 255, 0.86);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--line);
+}
+
+@media (max-width: 768px) {
+  .header {
+    height: 64px;
+    padding: 0 var(--space-4, 20px);
+  }
+}
+
+/* --------------------------------------------------------------------------
+   Logo
+   -------------------------------------------------------------------------- */
+
+.logo {
+  font-family: var(--font-display);
+  font-size: 22px;
+  font-weight: 600;
+  color: var(--ink);
+  text-decoration: none;
+  letter-spacing: 0.01em;
+  transition: color var(--transition-fast, 0.18s ease);
+}
+
+.logo:hover {
+  color: var(--brand);
+}
+
+/* --------------------------------------------------------------------------
+   Desktop navigation
+   -------------------------------------------------------------------------- */
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: var(--space-6, 32px);
+}
+
+.nav-links a {
+  position: relative;
+  font-family: var(--font-body);
+  font-size: 16px;
+  font-weight: 500;
+  color: var(--ink);
+  text-decoration: none;
+  padding: var(--space-2, 8px) 0;
+  transition: color var(--transition-fast, 0.18s ease);
+}
+
+.nav-links a::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 2px;
+  background: var(--brand);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform var(--transition-fast, 0.18s ease);
+}
+
+.nav-links a:hover,
+.nav-links a.active {
+  color: var(--brand);
+}
+
+.nav-links a:hover::after,
+.nav-links a.active::after {
+  transform: scaleX(1);
+}
+
+@media (max-width: 768px) {
+  .nav-links {
+    display: none;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   Hamburger button (mobile only)
+   -------------------------------------------------------------------------- */
+
+.hamburger {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  z-index: 110;
+}
+
+@media (max-width: 768px) {
+  .hamburger {
+    display: flex;
+  }
+}
+
+.hamburger .bar {
+  display: block;
+  width: 22px;
+  height: 2px;
+  background: var(--ink);
+  border-radius: 2px;
+  transition: transform var(--transition-fast, 0.18s ease),
+              opacity var(--transition-fast, 0.18s ease);
+}
+
+.hamburger.active .bar:nth-child(1) {
+  transform: translateY(7px) rotate(45deg);
+}
+
+.hamburger.active .bar:nth-child(2) {
+  opacity: 0;
+}
+
+.hamburger.active .bar:nth-child(3) {
+  transform: translateY(-7px) rotate(-45deg);
+}
+
+/* --------------------------------------------------------------------------
+   Mobile full-screen menu
+   -------------------------------------------------------------------------- */
+
+.nav {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .nav {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /* Consistently center the items vertically and horizontally */
+    justify-content: center; 
+    gap: 40px;
+    
+    position: fixed;
+    inset: 0;
+    height: 100vh; /* Set height here so it doesn't shift when active */
+    z-index: 105;
+    background: var(--bg);
+    
+    /* Smooth transition configuration */
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-20px); /* Increased slightly for a more visible slide effect */
+    transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s ease;
+    
+    /* Prevent cutting off items on ultra-short screens/landscape mode */
+    overflow-y: auto; 
+  }
+
+  .nav.active {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+    /* Removed layout-shifting rules (height, display, justify-content, gap) from here */
+  }
+
+  .nav a {
+    font-family: var(--font-display);
+    font-size: 26px;
+    font-weight: 600;
+    color: var(--ink);
+    text-decoration: none;
+    transition: color var(--transition-fast, 0.18s ease);
+  }
+
+  .nav a:hover,
+  .nav a.active {
+    color: var(--brand);
+  }
+}
+
+/* --------------------------------------------------------------------------
+   Focus visibility (keyboard accessibility)
+   -------------------------------------------------------------------------- */
+
+.logo:focus-visible,
+.nav-links a:focus-visible,
+.nav a:focus-visible,
+.hamburger:focus-visible {
+  outline: 2px solid var(--brand);
+  outline-offset: 3px;
+  border-radius: var(--radius-sm, 6px);
+}
+
+/* --------------------------------------------------------------------------
+   Reduced motion
+   -------------------------------------------------------------------------- */
+
+@media (prefers-reduced-motion: reduce) {
+  .nav,
+  .nav a,
+  .nav-links a,
+  .nav-links a::after,
+  .hamburger .bar,
+  .logo {
+    transition-duration: 0.01ms !important;
+  }
+}
