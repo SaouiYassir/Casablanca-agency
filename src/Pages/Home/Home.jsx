@@ -1,6 +1,7 @@
 import HeroSection from "./Sections/Hero/Hero";
 import Catalogue from "../Catalogue/Catalogue";
 import Avis from "./Sections/Avis/Avis";
+import Benefits from "./Sections/Benefits/Benefits";
 
 function Home() {
     return (
@@ -9,6 +10,7 @@ function Home() {
                 <HeroSection />
                 <Catalogue preview />
                 <Avis />
+                <Benefits />
             </main>
         </>
     )
