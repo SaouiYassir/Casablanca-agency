@@ -12,7 +12,7 @@ function NotFound() {
 
 
                 <div className="not-found-icon">
-                    <i className="bi bi-car-front-fill"></i>
+                    <i className="bi bi-bug-fill"></i>
                 </div>
 
 
@@ -43,7 +43,7 @@ function NotFound() {
 
 
                     <Link 
-                        to="/vehicules"
+                        to="/catalogue"
                         className="btn-secondary"
                     >
                         Voir les véhicules

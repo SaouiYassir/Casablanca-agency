@@ -24,7 +24,7 @@ function Footer() {
 
         <div className="footer-col">
           <h2>Liens utiles</h2>
-          <Link onClick={() => window.scrollTo({top: 0, behavior: 'smooth'})} to="/all-cars">Catalogue et tarifs</Link>
+          <Link onClick={() => window.scrollTo({top: 0, behavior: 'smooth'})} to="/catalogue">Catalogue et tarifs</Link>
           <Link onClick={() => window.scrollTo({top: 0, behavior: 'smooth'})} to="/conditions">Conditions générales</Link>
           <Link onClick={() => window.scrollTo({top: 0, behavior: 'smooth'})} to="/mentions-legales">Mentions légales</Link>
           <Link onClick={() => window.scrollTo({top: 0, behavior: 'smooth'})} to="/confidentialite">Confidentialité</Link>
