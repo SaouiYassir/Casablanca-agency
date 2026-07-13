@@ -1,5 +1,5 @@
 import { useEffect, useId, useState } from 'react'
-import { Link, NavLink } from 'react-router-dom'
+import { NavLink } from 'react-router-dom'
 import agency from '../../Config/Agency.js'
 import './Header.css'
 
@@ -35,7 +35,7 @@ function Header() {
       to={to}
       end={to === '/'}
       className={({ isActive }) => (isActive ? 'active' : undefined)}
-      onClick={() => setIsOpen(false)}
+      onClick={() => {setIsOpen(false);  window.scrollTo({top: 0, behavior: 'smooth'})}}
     >
       {label}
     </NavLink>
@@ -43,9 +43,9 @@ function Header() {
 
   return (
     <header className="header">
-      <Link className="logo" to="/" aria-label={`${agency.name} — Accueil`} > 
+      <h1 onClick={() => window.scrollTo({top: 0, behavior: 'smooth'})} className="logo" aria-label={`${agency.name} — Accueil`} > 
         {agency.name}
-      </Link>
+      </h1>
       <nav className="nav-links" aria-label="Navigation principale">{renderNavItems()}</nav>
       <button
         type="button"

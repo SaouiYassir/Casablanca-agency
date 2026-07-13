@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react'
+import { useMemo, useState, useEffect } from 'react' // 1. Added useEffect
 import { Link, useSearchParams } from 'react-router-dom'
 import Card from '../../Components/Card/Card.jsx'
 import cars from '../../Data/Catalogue.js'
@@ -31,6 +31,11 @@ function Catalogue({ preview = false }) {
   const [selectedPriceRange, setSelectedPriceRange] = useState(PRICE_RANGES[0].label)
   const [searchTerm, setSearchTerm] = useState('')
   const [currentPage, setCurrentPage] = useState(1)
+
+  // 2. Added hook: Whenever the page state changes, smoothly scroll back to top
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }, [currentPage]);
 
   const bookingContext = useMemo(() => ({
     lieu: searchParams.get('lieu') || '',
@@ -75,7 +80,7 @@ function Catalogue({ preview = false }) {
           {previewCars.map((car) => <Card key={car.id} {...car} year={car.année} />)}
         </div>
         <div className="view-more-container">
-          <Link to="/all-cars" className="view-more-btn">Voir tout le catalogue <i className="bi bi-arrow-right" /></Link>
+          <Link to="/all-cars" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })} className="view-more-btn">Voir tout le catalogue <i className="bi bi-arrow-right" /></Link>
         </div>
       </div>
     )
@@ -147,9 +152,25 @@ function Catalogue({ preview = false }) {
 
       {totalPages > 1 && (
         <nav className="pagination" aria-label="Pagination du catalogue">
-          <button type="button" onClick={() => setCurrentPage((page) => Math.max(page - 1, 1))} disabled={currentPage === 1}>Page précédente</button>
-          <span className="page-indicator">Page <strong>{currentPage}</strong> sur {totalPages}</span>
-          <button type="button" onClick={() => setCurrentPage((page) => Math.min(page + 1, totalPages))} disabled={currentPage === totalPages}>Page suivante</button>
+          <button
+            type="button"
+            onClick={() => setCurrentPage((page) => Math.max(page - 1, 1))}
+            disabled={currentPage === 1}
+          >
+            Page précédente
+          </button>
+
+          <span className="page-indicator">
+            Page <strong>{currentPage}</strong> sur {totalPages}
+          </span>
+
+          <button
+            type="button"
+            onClick={() => setCurrentPage((page) => Math.min(page + 1, totalPages))}
+            disabled={currentPage === totalPages}
+          >
+            Page suivante
+          </button>
         </nav>
       )}
     </div>

@@ -24,10 +24,10 @@ function Footer() {
 
         <div className="footer-col">
           <h2>Liens utiles</h2>
-          <Link to="/all-cars">Catalogue et tarifs</Link>
-          <Link to="/conditions">Conditions générales</Link>
-          <Link to="/mentions-legales">Mentions légales</Link>
-          <Link to="/confidentialite">Confidentialité</Link>
+          <Link onClick={() => window.scrollTo({top: 0, behavior: 'smooth'})} to="/all-cars">Catalogue et tarifs</Link>
+          <Link onClick={() => window.scrollTo({top: 0, behavior: 'smooth'})} to="/conditions">Conditions générales</Link>
+          <Link onClick={() => window.scrollTo({top: 0, behavior: 'smooth'})} to="/mentions-legales">Mentions légales</Link>
+          <Link onClick={() => window.scrollTo({top: 0, behavior: 'smooth'})} to="/confidentialite">Confidentialité</Link>
         </div>
 
         <div className="footer-col">

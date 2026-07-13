@@ -10,15 +10,17 @@ function App() {
 
   return (
     <>
-      <Header />
-      <Routes>
-        <Route path='/' element={<Home />} />
-        <Route path='/all-cars' element={<Catalogue />} />
-        {/* <Route path='/about' element={<About />} /> */}
-        {/* <Route path='/contact' element={<Contact />} /> */}
-        {/* <Route path='*' element={<NotFound />} /> */}
-      </Routes>
-      <Footer />
+    <BrowserRouter>
+        <Header />
+        <Routes>
+          <Route path='/' element={<Home />} />
+          <Route path='/all-cars' element={<Catalogue />} />
+          {/* <Route path='/about' element={<About />} /> */}
+          {/* <Route path='/contact' element={<Contact />} /> */}
+          {/* <Route path='*' element={<NotFound />} /> */}
+        </Routes>
+        <Footer />
+      </BrowserRouter>
     </>
   )
 }

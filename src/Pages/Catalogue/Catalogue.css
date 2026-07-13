@@ -47,5 +47,5 @@
   .catalogue-page { padding-top: 110px; }
   .filters-container, .cars-container, .cars-list-container { grid-template-columns: 1fr; }
   .catalogue-results-bar { align-items: flex-start; gap: 12px; }
-  .pagination { flex-wrap: wrap; }
+  .pagination { display: flex; flex-direction: column; }
 }
