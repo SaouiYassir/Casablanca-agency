@@ -1,69 +1,74 @@
-import React, { useState, useEffect } from 'react';
+import { useEffect, useId, useState } from 'react'
+import { NavLink } from 'react-router-dom'
+import agency from '../../Config/Agency.js'
 import './Header.css'
 
+const links = [
+  { to: '/', label: 'Accueil' },
+  { to: '/catalogue', label: 'Catalogue' },
+  { to: '/about', label: 'À propos' },
+  { to: '/contact', label: 'Contact' },
+]
+
 function Header() {
-    const [isScrolled, setIsScrolled] = useState(false);
-    const [isOpen, setIsOpen] = useState(false);
-    const [lang, setLang] = useState('FR');
+  const [isOpen, setIsOpen] = useState(false)
+  const menuId = useId()
 
-    useEffect(() => {
-        const handleScroll = () => {
-            if (window.scrollY > 50) {
-                setIsScrolled(true);
-            } else {
-                setIsScrolled(false);
-            }
-        };
+  useEffect(() => {
+    if (!isOpen) return undefined
 
-        window.addEventListener('scroll', handleScroll);
+    const handleEscape = (event) => {
+      if (event.key === 'Escape') setIsOpen(false)
+    }
 
-        return () => window.removeEventListener('scroll', handleScroll);
-    }, []);
+    document.body.style.overflow = 'hidden'
+    document.addEventListener('keydown', handleEscape)
+    return () => {
+      document.body.style.overflow = ''
+      document.removeEventListener('keydown', handleEscape)
+    }
+  }, [isOpen])
 
-    const toggleMenu = () => {
-        setIsOpen(!isOpen);
-    };
+  const renderNavItems = () => links.map(({ to, label }) => (
+    <NavLink
+      key={to}
+      to={to}
+      end={to === '/'}
+      className={({ isActive }) => (isActive ? 'active' : undefined)}
+      onClick={() => {setIsOpen(false);  window.scrollTo({top: 0, behavior: 'smooth'})}}
+    >
+      {label}
+    </NavLink>
+  ))
 
-    // Visual toggle only for now — swap this for real i18next locale
-    // switching + /en/ routing once the bilingual dictionaries are wired up.
-    const toggleLang = () => {
-        setLang(prev => (prev === 'FR' ? 'EN' : 'FR'));
-    };
-
-    return (
-
-        <header className={`header ${isScrolled ? 'scrolled' : ''}`}>
-            <div className="logo">Casablanca Location</div>
-            <nav className="nav-links">
-                <a href="/">Home</a>
-                <a href="/about">About</a>
-                <a href="/all-cars">Catalogue</a>
-                <a href="/contact">Contact</a>
-            </nav>
-
-            <div className="header-actions">
-                <button className="lang-toggle" onClick={toggleLang} aria-label="Changer de langue">
-                    {lang}
-                </button>
-
-                <div className={`hamburger ${isOpen ? 'active' : ''}`} onClick={toggleMenu}>
-                    <span className="bar"></span>
-                    <span className="bar"></span>
-                    <span className="bar"></span>
-                </div>
-            </div>
-
-            <nav className={`nav ${isOpen ? 'active' : ''}`}>
-                <a href="/" onClick={() => setIsOpen(false)}>Home</a>
-                <a href="/about" onClick={() => setIsOpen(false)}>About</a>
-                <a href="/all-cars" onClick={() => setIsOpen(false)}>Catalogue</a>
-                <a href="/contact" onClick={() => setIsOpen(false)}>Contact</a>
-                <button className="lang-toggle lang-toggle-mobile" onClick={toggleLang}>
-                    {lang === 'FR' ? 'Switch to EN' : 'Passer en FR'}
-                </button>
-            </nav>
-        </header>
-    );
+  return (
+    <header className="header">
+      <h1 onClick={() => window.scrollTo({top: 0, behavior: 'smooth'})} className="logo" aria-label={`${agency.name} — Accueil`} > 
+        {agency.name}
+      </h1>
+      <nav className="nav-links" aria-label="Navigation principale">{renderNavItems()}</nav>
+      <button
+        type="button"
+        className={`hamburger ${isOpen ? 'active' : ''}`}
+        onClick={() => setIsOpen((current) => !current)}
+        aria-expanded={isOpen}
+        aria-controls={menuId}
+        aria-label={isOpen ? 'Fermer le menu' : 'Ouvrir le menu'}
+      >
+        <span className="bar" />
+        <span className="bar" />
+        <span className="bar" />
+      </button>
+      <nav
+        id={menuId}
+        className={`nav ${isOpen ? 'active' : ''}`}
+        aria-label="Navigation mobile"
+        inert={!isOpen}
+      >
+        {renderNavItems()}
+      </nav>
+    </header>
+  )
 }
 
-export default Header;
+export default Header

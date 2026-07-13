@@ -1,149 +1,132 @@
-import { useState, useEffect } from 'react';
-import { createPortal } from 'react-dom';
-import './BookingModal.css';
+import { useEffect, useId, useRef, useState } from 'react'
+import { createPortal } from 'react-dom'
+import agency, { whatsappUrl } from '../../Config/Agency.js'
+import './BookingModal.css'
 
-function BookingModal({ isOpen, onClose, car }) {
-    const [formData, setFormData] = useState({
-        nom: '',
-        telephone: '',
-        dateDebut: '',
-        dateFin: '',
-        message: ''
-    });
+const emptyForm = (initial = {}) => ({
+  nom: '',
+  telephone: '',
+  dateDebut: initial.dateDebut?.slice(0, 10) || '',
+  dateFin: initial.dateFin?.slice(0, 10) || '',
+  message: '',
+})
 
-    useEffect(() => {
-        if (isOpen) {
-            document.body.style.overflow = 'hidden';
-        } else {
-            document.body.style.overflow = '';
-        }
-        return () => { document.body.style.overflow = ''; };
-    }, [isOpen]);
+function BookingModal({ isOpen, onClose, car, initialBooking = {} }) {
+  const [formData, setFormData] = useState(() => emptyForm(initialBooking))
+  const [error, setError] = useState('')
+  const titleId = useId()
+  const fieldPrefix = useId()
+  const modalRef = useRef(null)
+  const closeRef = useRef(null)
 
-    if (!isOpen || !car) return null;
+  useEffect(() => {
+    if (!isOpen) return undefined
+    const previousOverflow = document.body.style.overflow
+    const previouslyFocused = document.activeElement
+    document.body.style.overflow = 'hidden'
+    closeRef.current?.focus()
 
-    const handleChange = (e) => {
-        const { name, value } = e.target;
-        setFormData(prev => ({ ...prev, [name]: value }));
-    };
+    const handleKeyDown = (event) => {
+      if (event.key === 'Escape') onClose()
+      if (event.key !== 'Tab' || !modalRef.current) return
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
+      const focusable = [...modalRef.current.querySelectorAll('button, input, textarea, select, a[href]')]
+        .filter((element) => !element.disabled)
+      if (!focusable.length) return
+      const first = focusable[0]
+      const last = focusable[focusable.length - 1]
+      if (event.shiftKey && document.activeElement === first) {
+        event.preventDefault()
+        last.focus()
+      } else if (!event.shiftKey && document.activeElement === last) {
+        event.preventDefault()
+        first.focus()
+      }
+    }
 
-        const phoneNumber = "212601109965"; // Replace with your client's real phone line number
+    document.addEventListener('keydown', handleKeyDown)
+    return () => {
+      document.body.style.overflow = previousOverflow
+      document.removeEventListener('keydown', handleKeyDown)
+      previouslyFocused?.focus?.()
+    }
+  }, [isOpen, onClose])
 
-        const whatsappMessage = encodeURIComponent(
-            `Bonjour Casablanca Location ! Je souhaite réserver le véhicule suivant :\n` +
-            `- Modèle : ${car.carName} (${car.year || 'N/A'})\n` +
-            `- Prix : ${car.prixParJour} DH/jour\n` +
-            `- Carburant : ${car.fuel || ''}\n\n` +
-            `Mes informations :\n` +
-            `- Nom : ${formData.nom}\n` +
-            `- Téléphone : ${formData.telephone}\n` +
-            `- Date de début : ${formData.dateDebut || 'N/A'}\n` +
-            `- Date de fin : ${formData.dateFin || 'N/A'}` +
-            (formData.message ? `\n- Message : ${formData.message}` : '')
-        );
+  if (!isOpen || !car) return null
 
-        const whatsappUrl = `https://wa.me/${phoneNumber}?text=${whatsappMessage}`;
-        window.open(whatsappUrl, '_blank', 'noopener,noreferrer');
+  const handleChange = (event) => {
+    const { name, value } = event.target
+    setFormData((current) => ({ ...current, [name]: value }))
+  }
 
-        onClose();
-        setFormData({ nom: '', telephone: '', dateDebut: '', dateFin: '', message: '' });
-    };
+  const handleSubmit = (event) => {
+    event.preventDefault()
+    if (new Date(formData.dateFin) <= new Date(formData.dateDebut)) {
+      setError('La date de fin doit être postérieure à la date de début.')
+      return
+    }
 
-    const handleOverlayClick = (e) => {
-        if (e.target === e.currentTarget) onClose();
-    };
+    const message = [
+      `Bonjour ${agency.name} ! Je souhaite réserver ce véhicule :`,
+      `Modèle : ${car.carName} (${car.year || 'année à confirmer'})`,
+      `Prix indicatif : ${car.prixParJour} DH/jour`,
+      `Carburant : ${car.fuel || 'à confirmer'}`,
+      initialBooking.lieu ? `Lieu : ${initialBooking.lieu}` : '',
+      '',
+      `Nom : ${formData.nom}`,
+      `Téléphone : ${formData.telephone}`,
+      `Date de début : ${formData.dateDebut}`,
+      `Date de fin : ${formData.dateFin}`,
+      formData.message ? `Message : ${formData.message}` : '',
+    ].filter((line) => line !== '').join('\n')
 
-    return createPortal(
-        <div className="booking-modal-overlay" onClick={handleOverlayClick}>
-            <div className="booking-modal" role="dialog" aria-modal="true" aria-labelledby="booking-modal-title">
-                <button className="booking-modal-close" onClick={onClose} aria-label="Fermer">
-                    <i className="bi bi-x-lg"></i>
-                </button>
+    window.open(whatsappUrl(message), '_blank', 'noopener,noreferrer')
+    setFormData(emptyForm(initialBooking))
+    setError('')
+    onClose()
+  }
 
-                <div className="booking-modal-header">
-                    <h2 id="booking-modal-title">Réserver ce véhicule</h2>
-                    <p className="booking-modal-car">
-                        {car.carName} <span className="booking-modal-price">{car.prixParJour} DH/jour</span>
-                    </p>
-                </div>
+  return createPortal(
+    <div className="booking-modal-overlay" onMouseDown={(event) => event.target === event.currentTarget && onClose()}>
+      <div ref={modalRef} className="booking-modal" role="dialog" aria-modal="true" aria-labelledby={titleId}>
+        <button ref={closeRef} type="button" className="booking-modal-close" onClick={onClose} aria-label="Fermer la fenêtre">
+          <i className="bi bi-x-lg" aria-hidden="true" />
+        </button>
+        <div className="booking-modal-header">
+          <h2 id={titleId}>Réserver ce véhicule</h2>
+          <p className="booking-modal-car">{car.carName} <span className="booking-modal-price">{car.prixParJour} DH/jour</span></p>
+        </div>
 
-                <form className="booking-modal-form" onSubmit={handleSubmit}>
-                    <div className="booking-form-group">
-                        <label htmlFor="nom">Nom complet</label>
-                        <input
-                            id="nom"
-                            name="nom"
-                            type="text"
-                            required
-                            value={formData.nom}
-                            onChange={handleChange}
-                            placeholder="Votre nom"
-                        />
-                    </div>
-
-                    <div className="booking-form-group">
-                        <label htmlFor="telephone">Téléphone</label>
-                        <input
-                            id="telephone"
-                            name="telephone"
-                            type="tel"
-                            required
-                            value={formData.telephone}
-                            onChange={handleChange}
-                            placeholder="06 XX XX XX XX"
-                        />
-                    </div>
-
-                    <div className="booking-form-row">
-                        <div className="booking-form-group">
-                            <label htmlFor="dateDebut">Date de début</label>
-                            <input
-                                id="dateDebut"
-                                name="dateDebut"
-                                type="date"
-                                required
-                                value={formData.dateDebut}
-                                onChange={handleChange}
-                            />
-                        </div>
-
-                        <div className="booking-form-group">
-                            <label htmlFor="dateFin">Date de fin</label>
-                            <input
-                                id="dateFin"
-                                name="dateFin"
-                                type="date"
-                                required
-                                value={formData.dateFin}
-                                onChange={handleChange}
-                            />
-                        </div>
-                    </div>
-
-                    <div className="booking-form-group">
-                        <label htmlFor="message">Message (optionnel)</label>
-                        <textarea
-                            id="message"
-                            name="message"
-                            rows="3"
-                            value={formData.message}
-                            onChange={handleChange}
-                            placeholder="Précisions sur votre demande..."
-                        />
-                    </div>
-
-                    <button type="submit" className="booking-form-submit">
-                        <i className="bi bi-whatsapp"></i>
-                        Envoyer via WhatsApp
-                    </button>
-                </form>
+        <form className="booking-modal-form" onSubmit={handleSubmit}>
+          <div className="booking-form-group">
+            <label htmlFor={`${fieldPrefix}-nom`}>Nom complet</label>
+            <input id={`${fieldPrefix}-nom`} name="nom" type="text" autoComplete="name" required value={formData.nom} onChange={handleChange} placeholder="Votre nom" />
+          </div>
+          <div className="booking-form-group">
+            <label htmlFor={`${fieldPrefix}-telephone`}>Téléphone</label>
+            <input id={`${fieldPrefix}-telephone`} name="telephone" type="tel" autoComplete="tel" inputMode="tel" required pattern="[+0-9 ()-]{8,20}" value={formData.telephone} onChange={handleChange} placeholder="06 XX XX XX XX" />
+          </div>
+          <div className="booking-form-row">
+            <div className="booking-form-group">
+              <label htmlFor={`${fieldPrefix}-debut`}>Date de début</label>
+              <input id={`${fieldPrefix}-debut`} name="dateDebut" type="date" required value={formData.dateDebut} onChange={handleChange} />
             </div>
-        </div>,
-        document.body
-    );
+            <div className="booking-form-group">
+              <label htmlFor={`${fieldPrefix}-fin`}>Date de fin</label>
+              <input id={`${fieldPrefix}-fin`} name="dateFin" type="date" min={formData.dateDebut} required value={formData.dateFin} onChange={handleChange} />
+            </div>
+          </div>
+          <div className="booking-form-group">
+            <label htmlFor={`${fieldPrefix}-message`}>Message (optionnel)</label>
+            <textarea id={`${fieldPrefix}-message`} name="message" rows="3" maxLength="500" value={formData.message} onChange={handleChange} placeholder="Précisions sur votre demande…" />
+          </div>
+          {error && <p className="booking-form-error" role="alert">{error}</p>}
+          <button type="submit" className="booking-form-submit"><i className="bi bi-whatsapp" aria-hidden="true" /> Envoyer via WhatsApp</button>
+        </form>
+      </div>
+    </div>,
+    document.body,
+  )
 }
 
-export default BookingModal;
+export default BookingModal

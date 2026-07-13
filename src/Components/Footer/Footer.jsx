@@ -1,58 +1,55 @@
-import { useState } from 'react';
+import { Link } from 'react-router-dom'
+import agency, { fullAddress, whatsappUrl } from '../../Config/Agency.js'
 import './Footer.css'
 
+const socialIcons = {
+  instagram: 'bi-instagram',
+  facebook: 'bi-facebook',
+  tiktok: 'bi-tiktok',
+}
+
 function Footer() {
-    const [lang, setLang] = useState('FR');
+  const configuredSocials = Object.entries(agency.socials).filter(([, url]) => url)
 
-    return (
-        <div className="footer-container">
-            <div className="footer-columns">
-                <div className="footer-col">
-                    <h4>Contact</h4>
-                    <p>Casablanca, Maroc</p>
-                    <a href="tel:+212601109965">+212 6 01 10 99 65</a>
-                    <a href="https://wa.me/212601109965" target="_blank" rel="noreferrer">WhatsApp</a>
-                    <a href="mailto:contact@casablancalocation.com">contact@casablancalocation.com</a>
-                </div>
-
-                <div className="footer-col">
-                    <h4>Liens</h4>
-                    <a href="/all-cars">Flotte</a>
-                    <a href="/all-cars">Tarifs</a>
-                    <a href="/conditions">Conditions générales</a>
-                    <a href="/mentions-legales">Mentions légales</a>
-                </div>
-
-                <div className="footer-col">
-                    <h4>Suivez-nous</h4>
-                    <div className="footer-socials">
-                        <a href="https://instagram.com/" target="_blank" rel="noreferrer" aria-label="Instagram"><i className="bi bi-instagram"></i></a>
-                        <a href="https://facebook.com/" target="_blank" rel="noreferrer" aria-label="Facebook"><i className="bi bi-facebook"></i></a>
-                        <a href="https://tiktok.com/" target="_blank" rel="noreferrer" aria-label="TikTok"><i className="bi bi-tiktok"></i></a>
-                    </div>
-                </div>
-            </div>
-
-            <div className="footer-bottom">
-                <span>RC XXXXX · ICE XXXXXXXXXXXXXXX · © {new Date().getFullYear()} Casablanca Location</span>
-
-                <div className="footer-lang-switch">
-                    <button
-                        className={lang === 'FR' ? 'active' : ''}
-                        onClick={() => setLang('FR')}
-                    >
-                        FR
-                    </button>
-                    <button
-                        className={lang === 'EN' ? 'active' : ''}
-                        onClick={() => setLang('EN')}
-                    >
-                        EN
-                    </button>
-                </div>
-            </div>
+  return (
+    <footer className="footer-container">
+      <div className="footer-columns">
+        <div className="footer-col">
+          <h2>Contact</h2>
+          <p>{fullAddress}</p>
+          <a href={`tel:${agency.phoneHref}`}>{agency.phoneDisplay}</a>
+          <a href={whatsappUrl()} target="_blank" rel="noreferrer">WhatsApp</a>
+          <a href={`mailto:${agency.email}`}>{agency.email}</a>
         </div>
-    );
+
+        <div className="footer-col">
+          <h2>Liens utiles</h2>
+          <Link onClick={() => window.scrollTo({top: 0, behavior: 'smooth'})} to="/catalogue">Catalogue et tarifs</Link>
+          <Link onClick={() => window.scrollTo({top: 0, behavior: 'smooth'})} to="/conditions">Conditions générales</Link>
+          <Link onClick={() => window.scrollTo({top: 0, behavior: 'smooth'})} to="/mentions-legales">Mentions légales</Link>
+          <Link onClick={() => window.scrollTo({top: 0, behavior: 'smooth'})} to="/confidentialite">Confidentialité</Link>
+        </div>
+
+        <div className="footer-col">
+          <h2>Informations</h2>
+          <p>{agency.hours}</p>
+          <p>Réservation rapide par WhatsApp</p>
+          {configuredSocials.length > 0 && (
+            <div className="footer-socials">
+              {configuredSocials.map(([network, url]) => (
+                <a key={network} href={url} target="_blank" rel="noreferrer" aria-label={network}>
+                  <i className={`bi ${socialIcons[network]}`} />
+                </a>
+              ))}
+            </div>
+          )}
+        </div>
+      </div>
+      <div className="footer-bottom">
+        <span>© {new Date().getFullYear()} {agency.name}. Tous droits réservés.</span>
+      </div>
+    </footer>
+  )
 }
 
 export default Footer

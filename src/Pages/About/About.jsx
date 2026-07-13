@@ -1,90 +1,170 @@
-import { Link } from 'react-router-dom';
-import './About.css'
-import React from 'react';
+import "./About.css";
+import SEO from "../../Components/SEO/SEO";
+
+
+const values = [
+    {
+        icon: "bi bi-key-fill",
+        title: "Une flotte adaptée",
+        text: "Des véhicules sélectionnés pour répondre aux besoins des voyageurs, des familles et des professionnels."
+    },
+    {
+        icon: "bi bi-shield-check",
+        title: "Une expérience simple",
+        text: "Une réservation claire, un accompagnement personnalisé et aucune étape inutile."
+    },
+    {
+        icon: "bi bi-headset",
+        title: "Un accompagnement disponible",
+        text: "Notre équipe reste à votre écoute pour faciliter votre location avant et pendant votre séjour."
+    }
+];
+
 
 function About() {
+
     return (
-        <div className="about-page">
 
-            <div className="about-hero">
-                <h2>A propos de nous</h2>
-            </div>
+        <>
+            <SEO
+                title="À propos"
+                description="Casablanca Agency est une agence de location de voitures basée à Casablanca. Notre mission est de proposer des véhicules fiables, des tarifs compétitifs et un service client de qualité."
+                path="/about"
+            />
+            <main className="about-page">
 
-            <div className="about-grid">
-                <div className="about-story">
-                    <span className="section-label">Notre histoire</span>
+
+                <section className="about-hero">
+
+                    <span>
+                        À propos de nous
+                    </span>
+
+                    <h1>
+                        Votre mobilité,
+                        notre priorité
+                    </h1>
+
                     <p>
-                        Depuis nos debuts, Casablanca Location accompagne les voyageurs
-                        et habitants de Casablanca avec une flotte fiable, des prix
-                        transparents et un service disponible a tout moment. Notre
-                        objectif est simple : vous offrir une experience de location
-                        simple, rapide et sans mauvaise surprise.
+                        Casablanca Location vous accompagne dans la location
+                        de véhicules au Maroc avec une approche simple,
+                        transparente et adaptée à vos besoins.
                     </p>
-                </div>
 
-                <div className="about-stats">
-                    <div className="stat-item">
-                        <span className="stat-number">120+</span>
-                        <span className="stat-label">Vehicules</span>
-                    </div>
-                    <div className="stat-item">
-                        <span className="stat-number">5000+</span>
-                        <span className="stat-label">Clients satisfaits</span>
-                    </div>
-                    <div className="stat-item">
-                        <span className="stat-number">24/7</span>
-                        <span className="stat-label">Support disponible</span>
-                    </div>
-                </div>
-            </div>
+                </section>
 
-            <div className="about-why">
-                <h3>Pourquoi nous choisir</h3>
 
-                <div className="why-grid">
-                    <div className="why-card">
-                        <span className="why-title">Fiabilite</span>
-                        <p>Vehicules entretenus regulierement et controles avant chaque depart.</p>
+
+                <section className="about-values">
+
+
+                    <div className="section-title">
+
+                        <h2>
+                            Nos engagements
+                        </h2>
+
+                        <p>
+                            Une expérience pensée pour rendre votre déplacement
+                            plus agréable et plus serein.
+                        </p>
+
                     </div>
-                    <div className="why-card">
-                        <span className="why-title">Prix justes</span>
-                        <p>Tarifs clairs, affiches a l'avance, sans frais caches.</p>
+
+
+
+                    <div className="values-grid">
+
+
+                        {
+                            values.map((item, index) => (
+
+                                <article
+                                    className="value-card"
+                                    key={index}
+                                >
+
+                                    <div className="value-icon">
+                                        <i className={item.icon}></i>
+                                    </div>
+
+
+                                    <h3>
+                                        {item.title}
+                                    </h3>
+
+
+                                    <p>
+                                        {item.text}
+                                    </p>
+
+                                </article>
+
+                            ))
+                        }
+
+
                     </div>
-                    <div className="why-card">
-                        <span className="why-title">Reservation rapide</span>
-                        <p>Reservez directement via WhatsApp en quelques minutes.</p>
+
+
+                </section>
+
+
+
+
+                <section className="about-process">
+
+
+                    <h2>
+                        Comment ça fonctionne ?
+                    </h2>
+
+
+                    <div className="steps">
+
+
+                        <div>
+                            <strong>01</strong>
+                            <h3>Choisissez votre véhicule</h3>
+                            <p>
+                                Consultez notre catalogue et trouvez
+                                le véhicule adapté à votre séjour.
+                            </p>
+                        </div>
+
+
+                        <div>
+                            <strong>02</strong>
+                            <h3>Envoyez votre demande</h3>
+                            <p>
+                                Contactez-nous rapidement par WhatsApp
+                                ou via notre formulaire.
+                            </p>
+                        </div>
+
+
+                        <div>
+                            <strong>03</strong>
+                            <h3>Profitez du voyage</h3>
+                            <p>
+                                Récupérez votre véhicule et partez
+                                en toute tranquillité.
+                            </p>
+                        </div>
+
+
                     </div>
-                </div>
-            </div>
 
-            {/* Legal registration proof — big trust signal in Morocco per spec 3.6.
-                Values below are placeholders — replace with the agency's real
-                RC / ICE numbers before this goes live. */}
-            <div className="about-legal">
-                <div className="about-legal-item">
-                    <span className="about-legal-label">RC</span>
-                    <span className="about-legal-value">XXXXX</span>
-                </div>
-                <div className="about-legal-item">
-                    <span className="about-legal-label">ICE</span>
-                    <span className="about-legal-value">XXXXXXXXXXXXXXX</span>
-                </div>
-                <div className="about-legal-item">
-                    <span className="about-legal-label">Adresse</span>
-                    <span className="about-legal-value">À compléter — Casablanca</span>
-                </div>
-            </div>
 
-            <div className="about-cta">
-                <div className="cta-text">
-                    <span className="cta-title">Pret a prendre la route ?</span>
-                    <span className="cta-subtitle">Decouvrez notre catalogue et reservez en quelques clics.</span>
-                </div>
-                <button className="cta-btn" onClick={() => window.open('/all-cars', '_parent')}>Voir le catalogue</button>
-            </div>
+                </section>
 
-        </div>
-    );
+
+            </main>
+        </>
+
+
+    )
 }
 
-export default About
+
+export default About;

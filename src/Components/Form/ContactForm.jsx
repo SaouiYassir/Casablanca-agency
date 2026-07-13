@@ -1,80 +1,67 @@
-import React, { useRef, useState } from 'react';
-import emailjs from '@emailjs/browser';
-import './ContactForm.css';
+import { useRef, useState } from 'react'
+import emailjs from '@emailjs/browser'
+import './ContactForm.css'
 
-const ContactForm = () => {
-  const form = useRef();
-  const [status, setStatus] = useState('');
+const emailConfig = {
+  serviceId: import.meta.env.VITE_EMAILJS_SERVICE_ID,
+  templateId: import.meta.env.VITE_EMAILJS_TEMPLATE_ID,
+  publicKey: import.meta.env.VITE_EMAILJS_PUBLIC_KEY,
+}
 
-  const sendEmail = (e) => {
-    e.preventDefault();
-    setStatus('pending');
+function ContactForm() {
+  const formRef = useRef(null)
+  const [status, setStatus] = useState('idle')
 
-    emailjs.sendForm(
-      'service_t3kgw2g',
-      'template_5s7byy3',
-      form.current,
-      'shAkDUqexRq2d1Kz2'
-    )
-    .then(() => {
-        setStatus('success');
-        form.current.reset();
-        setTimeout(() => setStatus(''), 5000);
-    }, (error) => {
-        console.error('EmailJS Error:', error.text);
-        setStatus('error');
-    });
-  };
+  const sendEmail = async (event) => {
+    event.preventDefault()
+    if (event.currentTarget.elements.website.value) return
+    if (!emailConfig.serviceId || !emailConfig.templateId || !emailConfig.publicKey) {
+      setStatus('unconfigured')
+      return
+    }
 
-  const statusMessages = {
-    pending: 'Envoi en cours...',
-    success: 'Message envoye avec succes !',
-    error: 'Echec de l\'envoi. Veuillez reessayer.',
-  };
+    setStatus('pending')
+    try {
+      await emailjs.sendForm(emailConfig.serviceId, emailConfig.templateId, formRef.current, emailConfig.publicKey)
+      formRef.current.reset()
+      setStatus('success')
+    } catch {
+      setStatus('error')
+    }
+  }
+
+  const messages = {
+    success: 'Votre message a bien été envoyé.',
+    error: 'L’envoi a échoué. Contactez-nous par WhatsApp ou réessayez.',
+    unconfigured: 'Le formulaire doit encore être connecté à EmailJS. Utilisez WhatsApp pour le moment.',
+  }
 
   return (
-    <div id='ContactForm'>
-      <form className='form' ref={form} onSubmit={sendEmail}>
+    <form className="form" ref={formRef} onSubmit={sendEmail}>
+      <div className="input-group">
+        <label htmlFor="from_name">Nom complet</label>
+        <input id="from_name" name="from_name" type="text" autoComplete="name" placeholder="Votre nom" required />
+      </div>
+      <div className="input-group">
+        <label htmlFor="from_email">E-mail</label>
+        <input id="from_email" name="from_email" type="email" autoComplete="email" placeholder="vous@exemple.com" required />
+      </div>
+      <div className="input-group">
+        <label htmlFor="subject">Sujet</label>
+        <input id="subject" name="subject" type="text" placeholder="Objet de votre demande" required />
+      </div>
+      <div className="input-group message-group">
+        <label htmlFor="contact_message">Message</label>
+        <textarea id="contact_message" name="message" maxLength="1500" placeholder="Décrivez votre besoin…" required />
+      </div>
+      <input className="form-honeypot" type="text" name="website" tabIndex="-1" autoComplete="off" aria-hidden="true" />
+      <input type="hidden" name="time" value={new Date().toLocaleString('fr-MA')} />
+      <button type="submit" disabled={status === 'pending'} className="send-butt">
+        {status === 'pending' ? 'Envoi en cours…' : 'Envoyer le message'}
+      </button>
+      {messages[status] && <p className={`form-status ${status}`} role="status" aria-live="polite">{messages[status]}</p>}
+    </form>
+  )
+}
 
-        <div className='input-group'>
-          <label htmlFor="from_name">Nom Complet</label>
-          <input id="from_name" placeholder='Votre Nom' type="text" name="from_name" required />
-        </div>
-
-        <div className='input-group'>
-          <label htmlFor="from_email">Email</label>
-          <input
-            id="from_email"
-            type="email"
-            name="from_email"
-            placeholder='vous@gmail.com'
-            required
-          />
-        </div>
-
-        <div className='input-group message-group'>
-          <label htmlFor="message">Message</label>
-          <textarea id="message" placeholder='Decrivez votre besoin ...' name="message" required />
-        </div>
-
-        <input type="hidden" name="time" value={new Date().toLocaleString()} />
-
-        <button
-          type="submit"
-          disabled={status === 'pending'}
-          className='send-butt'
-        >
-          {status === 'pending' ? 'Envoi en cours...' : 'Envoyer le message'}
-        </button>
-
-        {status && (
-          <p className={`form-status ${status}`}>
-            {statusMessages[status]}
-          </p>
-        )}
-      </form>
-    </div>
-  );
-};
-
-export default ContactForm;
+export default ContactForm

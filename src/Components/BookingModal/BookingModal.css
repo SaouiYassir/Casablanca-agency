@@ -68,7 +68,7 @@
 }
 
 .booking-modal-header h2 {
-    font-family: 'Roboto Mono', monospace;
+    font-family: var(--font-display);
     color: #1f2733;
     font-size: 1.4rem;
     margin: 0 0 8px;
@@ -147,6 +147,12 @@
     justify-content: center;
     gap: 8px;
     transition: background 0.15s;
+}
+
+.booking-form-error {
+    color: var(--brand-deep);
+    font-size: .82rem;
+    font-weight: 600;
 }
 
 .booking-form-submit:hover {

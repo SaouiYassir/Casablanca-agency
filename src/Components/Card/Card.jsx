@@ -16,7 +16,8 @@ function Card({
     rating,
     seats,
     luggage,
-    ac
+    ac,
+    bookingContext
 }) {
     const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -44,7 +45,7 @@ function Card({
             {/* Photo */}
             <div className="card-image-wrapper">
                 {image ? (
-                    <img src={image} alt={carName} className="card-image" loading="lazy" />
+                    <img src={image} alt={carName} className="card-image" loading="lazy" width="500" height="300" />
                 ) : (
                     <div className="card-image-placeholder">
                         <i className="bi bi-car-front"></i>
@@ -106,6 +107,7 @@ function Card({
                     </span>
                 ) : (
                     <button
+                        type="button"
                         className="card-book-btn"
                         onClick={() => setIsModalOpen(true)}
                     >
@@ -118,6 +120,7 @@ function Card({
                 isOpen={isModalOpen}
                 onClose={() => setIsModalOpen(false)}
                 car={{ carName, year, prixParJour, fuel }}
+                initialBooking={bookingContext}
             />
         </div>
     );
