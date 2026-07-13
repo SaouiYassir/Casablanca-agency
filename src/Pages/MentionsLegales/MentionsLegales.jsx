@@ -1,4 +1,5 @@
 import LegalLayout from '../../Components/Legal/LegalLayout.jsx'
+import SEO from '../../Components/SEO/SEO.jsx'
 
 
 function MentionsLegales() {
@@ -56,13 +57,22 @@ function MentionsLegales() {
     ]
 
     return (
-        <LegalLayout
-            eyebrow="Mentions légales"
-            title="Mentions légales"
-            updatedDate="13 juillet 2026"
-            intro="Informations relatives à l'éditeur, à l'hébergeur et aux conditions d'utilisation du site, conformément à la réglementation en vigueur."
-            sections={sections}
-        />
+        <>
+            <SEO
+                title="Mentions légales"
+                description="Informations légales concernant Casablanca Agency, éditeur du site de location de voitures à Casablanca."
+                path="/mentions-legales"
+                noIndex
+            />
+            <LegalLayout
+                eyebrow="Mentions légales"
+                title="Mentions légales"
+                updatedDate="13 juillet 2026"
+                intro="Informations relatives à l'éditeur, à l'hébergeur et aux conditions d'utilisation du site, conformément à la réglementation en vigueur."
+                sections={sections}
+            />
+
+        </>
     )
 
 }

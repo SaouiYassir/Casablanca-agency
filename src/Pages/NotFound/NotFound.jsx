@@ -1,66 +1,73 @@
 import { Link } from "react-router-dom";
+import SEO from "../../Components/SEO/SEO";
 import "./NotFound.css";
 
 
 function NotFound() {
 
     return (
+        <>
+            <SEO
+                title="Page introuvable"
+                description="La page que vous recherchez n'existe pas ou a été déplacée."
+                noIndex
+            />
+            <main className="not-found">
 
-        <main className="not-found">
-
-            <div className="not-found-content">
+                <div className="not-found-content">
 
 
-                <div className="not-found-icon">
-                    <i className="bi bi-bug-fill"></i>
+                    <div className="not-found-icon">
+                        <i className="bi bi-bug-fill"></i>
+                    </div>
+
+
+                    <span className="not-found-label">
+                        Erreur 404
+                    </span>
+
+
+                    <h1>
+                        Cette route n'existe pas
+                    </h1>
+
+
+                    <p>
+                        La page que vous recherchez semble avoir disparu.
+                        Continuez votre voyage et découvrez nos véhicules disponibles.
+                    </p>
+
+
+                    <div className="not-found-actions">
+
+                        <Link
+                            to="/"
+                            className="btn-primary"
+                        >
+                            Retour à l'accueil
+                        </Link>
+
+
+                        <Link
+                            to="/catalogue"
+                            className="btn-secondary"
+                        >
+                            Voir les véhicules
+                        </Link>
+
+                    </div>
+
+
                 </div>
 
 
-                <span className="not-found-label">
-                    Erreur 404
-                </span>
-
-
-                <h1>
-                    Cette route n'existe pas
-                </h1>
-
-
-                <p>
-                    La page que vous recherchez semble avoir disparu.
-                    Continuez votre voyage et découvrez nos véhicules disponibles.
-                </p>
-
-
-                <div className="not-found-actions">
-
-                    <Link 
-                        to="/"
-                        className="btn-primary"
-                    >
-                        Retour à l'accueil
-                    </Link>
-
-
-                    <Link 
-                        to="/catalogue"
-                        className="btn-secondary"
-                    >
-                        Voir les véhicules
-                    </Link>
-
+                <div className="not-found-number">
+                    404
                 </div>
 
 
-            </div>
-
-
-            <div className="not-found-number">
-                404
-            </div>
-
-
-        </main>
+            </main>
+        </>
 
     )
 }

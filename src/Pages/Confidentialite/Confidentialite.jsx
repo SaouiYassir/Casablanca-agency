@@ -1,4 +1,5 @@
 import LegalLayout from '../../Components/Legal/LegalLayout.jsx'
+import SEO from '../../Components/SEO/SEO.jsx'
 
 
 function Confidentialite() {
@@ -73,13 +74,21 @@ function Confidentialite() {
     ]
 
     return (
-        <LegalLayout
-            eyebrow="Confidentialité"
-            title="Politique de confidentialité"
-            updatedDate="13 juillet 2026"
-            intro="Cette page explique quelles données sont collectées via le site, comment elles sont utilisées, et quels droits vous pouvez exercer."
-            sections={sections}
-        />
+        <>
+            <SEO
+                title="Politique de confidentialité"
+                description="Découvrez comment Casablanca Agency collecte, utilise et protège vos données personnelles conformément à la réglementation en vigueur."
+                path="/confidentialite"
+                noIndex
+            />
+            <LegalLayout
+                eyebrow="Confidentialité"
+                title="Politique de confidentialité"
+                updatedDate="13 juillet 2026"
+                intro="Cette page explique quelles données sont collectées via le site, comment elles sont utilisées, et quels droits vous pouvez exercer."
+                sections={sections}
+            />
+        </>
     )
 
 }

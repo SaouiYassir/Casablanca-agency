@@ -2,6 +2,7 @@ import { useMemo, useState, useEffect } from 'react' // 1. Added useEffect
 import { Link, useSearchParams } from 'react-router-dom'
 import Card from '../../Components/Card/Card.jsx'
 import cars from '../../Data/Catalogue.js'
+import SEO from '../../Components/SEO/SEO.jsx'
 import './Catalogue.css'
 
 const CARDS_PER_PAGE = 9
@@ -92,88 +93,97 @@ function Catalogue({ preview = false }) {
   const hasSearchDates = bookingContext.dateDebut && bookingContext.dateFin
 
   return (
-    <div className="catalogue-section catalogue-page">
-      <span className="catalogue-kicker">Catalogue</span>
-      <h1 className="catalogue-title">Notre flotte</h1>
-      <p className="catalogue-subtitle">Choisissez le véhicule qui correspond à votre trajet.</p>
+    <>
+      <SEO
+        title="Catalogue de véhicules"
+        description="Découvrez notre flotte de voitures disponibles à la location à Casablanca : citadines, berlines, SUV, utilitaires et véhicules premium au meilleur rapport qualité-prix."
+        path="/catalogue"
+      />
+      <main>
+        <div className="catalogue-section catalogue-page">
+          <span className="catalogue-kicker">Catalogue</span>
+          <h1 className="catalogue-title">Notre flotte</h1>
+          <p className="catalogue-subtitle">Choisissez le véhicule qui correspond à votre trajet.</p>
 
-      {hasSearchDates && (
-        <div className="search-summary" role="status">
-          <i className="bi bi-calendar-check" /> Du {formatDate(bookingContext.dateDebut)} au {formatDate(bookingContext.dateFin)}
-        </div>
-      )}
+          {hasSearchDates && (
+            <div className="search-summary" role="status">
+              <i className="bi bi-calendar-check" /> Du {formatDate(bookingContext.dateDebut)} au {formatDate(bookingContext.dateFin)}
+            </div>
+          )}
 
-      <div className="filters-container" aria-label="Filtres du catalogue">
-        <div className="filter-field">
-          <label htmlFor="search-input" className="sr-only">Rechercher une voiture</label>
-          <div className="search-wrapper">
-            <i className="bi bi-search search-icon" aria-hidden="true" />
-            <input id="search-input" type="search" placeholder="Marque ou modèle" value={searchTerm} onChange={updateFilter(setSearchTerm)} />
+          <div className="filters-container" aria-label="Filtres du catalogue">
+            <div className="filter-field">
+              <label htmlFor="search-input" className="sr-only">Rechercher une voiture</label>
+              <div className="search-wrapper">
+                <i className="bi bi-search search-icon" aria-hidden="true" />
+                <input id="search-input" type="search" placeholder="Marque ou modèle" value={searchTerm} onChange={updateFilter(setSearchTerm)} />
+              </div>
+            </div>
+            <div className="filter-field">
+              <label htmlFor="categories-select" className="sr-only">Catégorie</label>
+              <select id="categories-select" value={selectedCategory} onChange={updateFilter(setSelectedCategory)}>
+                {categories.map((category) => <option key={category} value={category}>{category}</option>)}
+              </select>
+            </div>
+            <div className="filter-field">
+              <label htmlFor="fuels-select" className="sr-only">Carburant</label>
+              <select id="fuels-select" value={selectedFuel} onChange={updateFilter(setSelectedFuel)}>
+                {fuels.map((fuel) => <option key={fuel} value={fuel}>{fuel}</option>)}
+              </select>
+            </div>
+            <div className="filter-field">
+              <label htmlFor="price-select" className="sr-only">Prix par jour</label>
+              <select id="price-select" value={selectedPriceRange} onChange={updateFilter(setSelectedPriceRange)}>
+                {PRICE_RANGES.map((range) => <option key={range.label} value={range.label}>{range.label}</option>)}
+              </select>
+            </div>
           </div>
-        </div>
-        <div className="filter-field">
-          <label htmlFor="categories-select" className="sr-only">Catégorie</label>
-          <select id="categories-select" value={selectedCategory} onChange={updateFilter(setSelectedCategory)}>
-            {categories.map((category) => <option key={category} value={category}>{category}</option>)}
-          </select>
-        </div>
-        <div className="filter-field">
-          <label htmlFor="fuels-select" className="sr-only">Carburant</label>
-          <select id="fuels-select" value={selectedFuel} onChange={updateFilter(setSelectedFuel)}>
-            {fuels.map((fuel) => <option key={fuel} value={fuel}>{fuel}</option>)}
-          </select>
-        </div>
-        <div className="filter-field">
-          <label htmlFor="price-select" className="sr-only">Prix par jour</label>
-          <select id="price-select" value={selectedPriceRange} onChange={updateFilter(setSelectedPriceRange)}>
-            {PRICE_RANGES.map((range) => <option key={range.label} value={range.label}>{range.label}</option>)}
-          </select>
-        </div>
-      </div>
 
-      <div className="catalogue-results-bar">
-        <span className="catalogue-results-count">{filteredCars.length} résultat{filteredCars.length !== 1 ? 's' : ''}</span>
-        {(selectedCategory !== 'Tous' || selectedFuel !== 'Tous' || selectedPriceRange !== PRICE_RANGES[0].label || searchTerm) && (
-          <button type="button" className="reset-inline" onClick={resetFilters}>Réinitialiser</button>
-        )}
-      </div>
-
-      <div className="cars-list-container">
-        {currentCars.length > 0 ? currentCars.map((car) => (
-          <Card key={car.id} {...car} year={car.année} bookingContext={bookingContext} />
-        )) : (
-          <div className="no-results">
-            <i className="bi bi-car-front" aria-hidden="true" />
-            <p>Aucune voiture ne correspond à vos critères.</p>
-            <button type="button" className="reset-filters-btn" onClick={resetFilters}>Réinitialiser les filtres</button>
+          <div className="catalogue-results-bar">
+            <span className="catalogue-results-count">{filteredCars.length} résultat{filteredCars.length !== 1 ? 's' : ''}</span>
+            {(selectedCategory !== 'Tous' || selectedFuel !== 'Tous' || selectedPriceRange !== PRICE_RANGES[0].label || searchTerm) && (
+              <button type="button" className="reset-inline" onClick={resetFilters}>Réinitialiser</button>
+            )}
           </div>
-        )}
-      </div>
 
-      {totalPages > 1 && (
-        <nav className="pagination" aria-label="Pagination du catalogue">
-          <button
-            type="button"
-            onClick={() => setCurrentPage((page) => Math.max(page - 1, 1))}
-            disabled={currentPage === 1}
-          >
-            Page précédente
-          </button>
+          <div className="cars-list-container">
+            {currentCars.length > 0 ? currentCars.map((car) => (
+              <Card key={car.id} {...car} year={car.année} bookingContext={bookingContext} />
+            )) : (
+              <div className="no-results">
+                <i className="bi bi-car-front" aria-hidden="true" />
+                <p>Aucune voiture ne correspond à vos critères.</p>
+                <button type="button" className="reset-filters-btn" onClick={resetFilters}>Réinitialiser les filtres</button>
+              </div>
+            )}
+          </div>
 
-          <span className="page-indicator">
-            Page <strong>{currentPage}</strong> sur {totalPages}
-          </span>
+          {totalPages > 1 && (
+            <nav className="pagination" aria-label="Pagination du catalogue">
+              <button
+                type="button"
+                onClick={() => setCurrentPage((page) => Math.max(page - 1, 1))}
+                disabled={currentPage === 1}
+              >
+                Page précédente
+              </button>
 
-          <button
-            type="button"
-            onClick={() => setCurrentPage((page) => Math.min(page + 1, totalPages))}
-            disabled={currentPage === totalPages}
-          >
-            Page suivante
-          </button>
-        </nav>
-      )}
-    </div>
+              <span className="page-indicator">
+                Page <strong>{currentPage}</strong> sur {totalPages}
+              </span>
+
+              <button
+                type="button"
+                onClick={() => setCurrentPage((page) => Math.min(page + 1, totalPages))}
+                disabled={currentPage === totalPages}
+              >
+                Page suivante
+              </button>
+            </nav>
+          )}
+        </div>
+      </main>
+    </>
   )
 }
 

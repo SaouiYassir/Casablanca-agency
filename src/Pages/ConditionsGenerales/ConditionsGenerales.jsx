@@ -1,4 +1,5 @@
 import LegalLayout from '../../Components/Legal/LegalLayout.jsx'
+import SEO from '../../Components/SEO/SEO.jsx'
 
 
 function ConditionsGenerales() {
@@ -88,13 +89,21 @@ function ConditionsGenerales() {
     ]
 
     return (
-        <LegalLayout
-            eyebrow="Conditions générales"
-            title="Conditions générales de vente et d'utilisation"
-            updatedDate="13 juillet 2026"
-            intro="Les présentes conditions décrivent les règles applicables à la consultation du site et aux demandes de location de véhicules auprès de [Nom de la société]."
-            sections={sections}
-        />
+        <>
+            <SEO
+                title="Conditions Générales"
+                description="Consultez les conditions générales de location et d'utilisation des services proposés par Casablanca Agency."
+                path="/conditions-generales"
+                noIndex
+            />
+            <LegalLayout
+                eyebrow="Conditions générales"
+                title="Conditions générales de vente et d'utilisation"
+                updatedDate="13 juillet 2026"
+                intro="Les présentes conditions décrivent les règles applicables à la consultation du site et aux demandes de location de véhicules auprès de [Nom de la société]."
+                sections={sections}
+            />
+        </>
     )
 
 }

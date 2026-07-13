@@ -1,4 +1,5 @@
 import "./About.css";
+import SEO from "../../Components/SEO/SEO";
 
 
 const values = [
@@ -20,139 +21,147 @@ const values = [
 ];
 
 
-function About(){
+function About() {
 
     return (
 
-        <main className="about-page">
+        <>
+            <SEO
+                title="À propos"
+                description="Casablanca Agency est une agence de location de voitures basée à Casablanca. Notre mission est de proposer des véhicules fiables, des tarifs compétitifs et un service client de qualité."
+                path="/about"
+            />
+            <main className="about-page">
 
 
-            <section className="about-hero">
+                <section className="about-hero">
 
-                <span>
-                    À propos de nous
-                </span>
+                    <span>
+                        À propos de nous
+                    </span>
 
-                <h1>
-                    Votre mobilité,
-                    notre priorité
-                </h1>
-
-                <p>
-                    Casablanca Location vous accompagne dans la location
-                    de véhicules au Maroc avec une approche simple,
-                    transparente et adaptée à vos besoins.
-                </p>
-
-            </section>
-
-
-
-            <section className="about-values">
-
-
-                <div className="section-title">
-
-                    <h2>
-                        Nos engagements
-                    </h2>
+                    <h1>
+                        Votre mobilité,
+                        notre priorité
+                    </h1>
 
                     <p>
-                        Une expérience pensée pour rendre votre déplacement
-                        plus agréable et plus serein.
+                        Casablanca Location vous accompagne dans la location
+                        de véhicules au Maroc avec une approche simple,
+                        transparente et adaptée à vos besoins.
                     </p>
 
-                </div>
+                </section>
 
 
 
-                <div className="values-grid">
+                <section className="about-values">
 
 
-                    {
-                        values.map((item,index)=>(
+                    <div className="section-title">
 
-                            <article 
-                                className="value-card"
-                                key={index}
-                            >
+                        <h2>
+                            Nos engagements
+                        </h2>
 
-                                <div className="value-icon">
-                                    <i className={item.icon}></i>
-                                </div>
-
-
-                                <h3>
-                                    {item.title}
-                                </h3>
-
-
-                                <p>
-                                    {item.text}
-                                </p>
-
-                            </article>
-
-                        ))
-                    }
-
-
-                </div>
-
-
-            </section>
-
-
-
-
-            <section className="about-process">
-
-
-                <h2>
-                    Comment ça fonctionne ?
-                </h2>
-
-
-                <div className="steps">
-
-
-                    <div>
-                        <strong>01</strong>
-                        <h3>Choisissez votre véhicule</h3>
                         <p>
-                            Consultez notre catalogue et trouvez
-                            le véhicule adapté à votre séjour.
+                            Une expérience pensée pour rendre votre déplacement
+                            plus agréable et plus serein.
                         </p>
+
                     </div>
 
 
-                    <div>
-                        <strong>02</strong>
-                        <h3>Envoyez votre demande</h3>
-                        <p>
-                            Contactez-nous rapidement par WhatsApp
-                            ou via notre formulaire.
-                        </p>
+
+                    <div className="values-grid">
+
+
+                        {
+                            values.map((item, index) => (
+
+                                <article
+                                    className="value-card"
+                                    key={index}
+                                >
+
+                                    <div className="value-icon">
+                                        <i className={item.icon}></i>
+                                    </div>
+
+
+                                    <h3>
+                                        {item.title}
+                                    </h3>
+
+
+                                    <p>
+                                        {item.text}
+                                    </p>
+
+                                </article>
+
+                            ))
+                        }
+
+
                     </div>
 
 
-                    <div>
-                        <strong>03</strong>
-                        <h3>Profitez du voyage</h3>
-                        <p>
-                            Récupérez votre véhicule et partez
-                            en toute tranquillité.
-                        </p>
+                </section>
+
+
+
+
+                <section className="about-process">
+
+
+                    <h2>
+                        Comment ça fonctionne ?
+                    </h2>
+
+
+                    <div className="steps">
+
+
+                        <div>
+                            <strong>01</strong>
+                            <h3>Choisissez votre véhicule</h3>
+                            <p>
+                                Consultez notre catalogue et trouvez
+                                le véhicule adapté à votre séjour.
+                            </p>
+                        </div>
+
+
+                        <div>
+                            <strong>02</strong>
+                            <h3>Envoyez votre demande</h3>
+                            <p>
+                                Contactez-nous rapidement par WhatsApp
+                                ou via notre formulaire.
+                            </p>
+                        </div>
+
+
+                        <div>
+                            <strong>03</strong>
+                            <h3>Profitez du voyage</h3>
+                            <p>
+                                Récupérez votre véhicule et partez
+                                en toute tranquillité.
+                            </p>
+                        </div>
+
+
                     </div>
 
 
-                </div>
+                </section>
 
 
-            </section>
+            </main>
+        </>
 
-
-        </main>
 
     )
 }
