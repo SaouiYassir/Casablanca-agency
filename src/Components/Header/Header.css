@@ -4,13 +4,6 @@
     box-sizing: border-box;
 }
 
-/*
-  Uses the Atlas Warm tokens defined in Home.css (--bg, --surface, --ink,
-  --ink-muted, --brand, --brand-deep, --accent, --line, --font-display,
-  --font-body). Once those tokens move to a global stylesheet, this file
-  can drop the Home.css dependency and import the global one instead.
-*/
-
 .header {
     display: flex;
     justify-content: space-around;
@@ -61,34 +54,6 @@
     gap: 20px;
 }
 
-.lang-toggle {
-    font-family: var(--font-body);
-    font-weight: 600;
-    font-size: 13px;
-    letter-spacing: 0.03em;
-    color: var(--ink);
-    background: var(--bg);
-    border: 1px solid var(--line);
-    border-radius: 6px;
-    padding: 6px 12px;
-    cursor: pointer;
-    transition: border-color 0.2s ease, color 0.2s ease;
-}
-
-.lang-toggle:hover {
-    border-color: var(--brand);
-    color: var(--brand);
-}
-
-.lang-toggle:focus-visible {
-    outline: 2px solid var(--brand);
-    outline-offset: 2px;
-}
-
-.lang-toggle-mobile {
-    display: none;
-}
-
 .nav {
     display: none;
 }
@@ -121,10 +86,6 @@
     }
 
     .header .nav-links {
-        display: none;
-    }
-
-    .header-actions .lang-toggle {
         display: none;
     }
 
@@ -174,8 +135,4 @@
         color: var(--brand);
     }
 
-    .nav .lang-toggle-mobile {
-        display: inline-block;
-        margin-top: 8px;
-    }
 }

@@ -34,22 +34,7 @@ function Footer() {
             </div>
 
             <div className="footer-bottom">
-                <span>RC XXXXX · ICE XXXXXXXXXXXXXXX · © {new Date().getFullYear()} Casablanca Location</span>
-
-                <div className="footer-lang-switch">
-                    <button
-                        className={lang === 'FR' ? 'active' : ''}
-                        onClick={() => setLang('FR')}
-                    >
-                        FR
-                    </button>
-                    <button
-                        className={lang === 'EN' ? 'active' : ''}
-                        onClick={() => setLang('EN')}
-                    >
-                        EN
-                    </button>
-                </div>
+                <span>© {new Date().getFullYear()} Casablanca Location</span>
             </div>
         </div>
     );

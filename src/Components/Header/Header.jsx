@@ -42,10 +42,6 @@ function Header() {
             </nav>
 
             <div className="header-actions">
-                <button className="lang-toggle" onClick={toggleLang} aria-label="Changer de langue">
-                    {lang}
-                </button>
-
                 <div className={`hamburger ${isOpen ? 'active' : ''}`} onClick={toggleMenu}>
                     <span className="bar"></span>
                     <span className="bar"></span>
@@ -58,9 +54,6 @@ function Header() {
                 <a href="/about" onClick={() => setIsOpen(false)}>About</a>
                 <a href="/all-cars" onClick={() => setIsOpen(false)}>Catalogue</a>
                 <a href="/contact" onClick={() => setIsOpen(false)}>Contact</a>
-                <button className="lang-toggle lang-toggle-mobile" onClick={toggleLang}>
-                    {lang === 'FR' ? 'Switch to EN' : 'Passer en FR'}
-                </button>
             </nav>
         </header>
     );
