@@ -1,44 +1,32 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom'
 import './Header.css'
 
 function Header() {
-    const [isScrolled, setIsScrolled] = useState(false);
     const [isOpen, setIsOpen] = useState(false);
-    const [lang, setLang] = useState('FR');
-
-    useEffect(() => {
-        const handleScroll = () => {
-            if (window.scrollY > 50) {
-                setIsScrolled(true);
-            } else {
-                setIsScrolled(false);
-            }
-        };
-
-        window.addEventListener('scroll', handleScroll);
-
-        return () => window.removeEventListener('scroll', handleScroll);
-    }, []);
 
     const toggleMenu = () => {
         setIsOpen(!isOpen);
     };
 
-    // Visual toggle only for now — swap this for real i18next locale
-    // switching + /en/ routing once the bilingual dictionaries are wired up.
-    const toggleLang = () => {
-        setLang(prev => (prev === 'FR' ? 'EN' : 'FR'));
+    const handleLinkClick = () => {
+        setIsOpen(false);
+        window.scrollTo({
+            top: 0,
+            left: 0,
+            behavior: 'smooth'
+        });
     };
 
     return (
 
-        <header className={`header ${isScrolled ? 'scrolled' : ''}`}>
-            <div className="logo">Casablanca Location</div>
+        <header className="header">
+            <div className="logo" onClick={() => window.scrollTo({top: 0, left: 0, behavior: 'smooth'})}>Casablanca Location</div>
             <nav className="nav-links">
-                <a href="/">Home</a>
-                <a href="/about">About</a>
-                <a href="/all-cars">Catalogue</a>
-                <a href="/contact">Contact</a>
+                <Link to="/" onClick={() => window.scrollTo({top: 0, left: 0, behavior: 'smooth'})}>Home</Link>
+                <Link to="/about" onClick={() => window.scrollTo({top: 0, left: 0, behavior: 'smooth'})}>About</Link>
+                <Link to="/all-cars" onClick={() => window.scrollTo({top: 0, left: 0, behavior: 'smooth'})}>Catalogue</Link>
+                <Link to="/contact" onClick={() => window.scrollTo({top: 0, left: 0, behavior: 'smooth'})}>Contact</Link>
             </nav>
 
             <div className="header-actions">
@@ -50,10 +38,10 @@ function Header() {
             </div>
 
             <nav className={`nav ${isOpen ? 'active' : ''}`}>
-                <a href="/" onClick={() => setIsOpen(false)}>Home</a>
-                <a href="/about" onClick={() => setIsOpen(false)}>About</a>
-                <a href="/all-cars" onClick={() => setIsOpen(false)}>Catalogue</a>
-                <a href="/contact" onClick={() => setIsOpen(false)}>Contact</a>
+                <Link to="/" onClick={handleLinkClick}>Home</Link>
+                <Link to="/about" onClick={handleLinkClick}>About</Link>
+                <Link to="/all-cars" onClick={handleLinkClick}>Catalogue</Link>
+                <Link to="/contact" onClick={handleLinkClick}>Contact</Link>     
             </nav>
         </header>
     );
