@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom'
 import './Hero.css'
-import heroBackground from '../../../../../public/hero-background.webp'
+import heroBackground from '../../../../assets/hero-background.webp'
 import agency from '../../../../Config/Agency'
 
 const dailyPrice = 250;
