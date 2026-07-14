@@ -34,7 +34,7 @@ function HeroSection() {
             </p>
 
             <div className="home-hero__actions">
-              <Link to='/all-cars' onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })} className="hero-button hero-button--primary">
+              <Link to='/catalogue' onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })} className="hero-button hero-button--primary">
                 Voir les véhicules
                 <i className="bi bi-arrow-right"></i>
               </Link>
