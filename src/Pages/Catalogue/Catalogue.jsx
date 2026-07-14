@@ -81,7 +81,7 @@ function Catalogue({ preview = false }) {
           {previewCars.map((car) => <Card key={car.id} {...car} year={car.année} />)}
         </div>
         <div className="view-more-container">
-          <Link to="/all-cars" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })} className="view-more-btn">Voir tout le catalogue <i className="bi bi-arrow-right" /></Link>
+          <Link to="/catalogue" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })} className="view-more-btn">Voir tout le catalogue <i className="bi bi-arrow-right" /></Link>
         </div>
       </div>
     )
